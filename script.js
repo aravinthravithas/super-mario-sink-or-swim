@@ -12,14 +12,14 @@ let mario = {
     y: 0.5 * canvas.height,
     width: 33,
     height: 33,
-    frameX: 0,
-    frameY: 0,
+    frameX: 3,
+    frameY: 3,
     speed: 5,
     moving: false
 }
 
 let marioSprite = new Image();
-marioSprite.src = "images/marioGreenFrogSuitSpiteSheet.png";
+marioSprite.src = "images/marioGreenFrogSuitSpriteSheet.png";
 
 function drawMario(img, sX, sY, sW, sH, dX, dY, dW, dH) {
     context.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH)
@@ -41,7 +41,7 @@ function animate() {
     if (elapsed > fpsInterval) {
         then = now - (elapsed % fpsInterval);
         context.clearRect(0, 0, canvas.width, canvas.height);
-        drawMario(marioSprite, mario.width & mario.frameX, mario.height * mario.frameY, mario.width, mario.height, mario.x, mario.y, mario.width, mario.height);
+        drawMario(marioSprite, mario.width * mario.frameX, mario.height * mario.frameY, mario.width, mario.height, mario.x, mario.y, mario.width, mario.height);
         moveMario();
         handleMarioFrame();
     }
