@@ -8,30 +8,59 @@ let context = canvas.getContext('2d');
 let keys = [];
 
 let mario = {
-    x: 0.5 * canvas.width - 20,
-    y: 0.5 * canvas.width - 35,
-    width: 50,
-    height: 50,
+    x: 0.5 * canvas.width,
+    y: 0.5 * canvas.height,
+    width: 33,
+    height: 33,
     frameX: 0,
     frameY: 0,
-    speed: 20,
+    speed: 5,
     moving: false
 }
 
 let marioSprite = new Image();
-marioSprite.src = "images/marioGreenFrogSuitSpiteSheet";
+marioSprite.src = "images/marioGreenFrogSuitSpiteSheet.png";
 
 function drawMario(img, sX, sY, sW, sH, dX, dY, dW, dH) {
     context.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH)
 };
+
+let fps, fpsInterval, startTime, now, then, elapsed;
+
+function startAnimating(fps) {
+    fpsInterval = 1000/fps;
+    then = Date.now();
+    startTime = then;
+    animate();
+}
+
+function animate() {
+    requestAnimationFrame(animate);
+    now = Date.now();
+    elapsed = now - then;
+    if (elapsed > fpsInterval) {
+        then = now - (elapsed % fpsInterval);
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        drawMario(marioSprite, mario.width & mario.frameX, mario.height * mario.frameY, mario.width, mario.height, mario.x, mario.y, mario.width, mario.height);
+        moveMario();
+        handleMarioFrame();
+    }
+}
+
+startAnimating(10);
 
 window.addEventListener("keydown", function(event) {
     keys[event.keyCode] = true;
     mario.moving = true;
 });
 
-// Code block below prevents the clicking of arrows keys from scrolling in active browser window
 window.addEventListener("keyup", function(event) {
+    delete keys[event.keyCode];
+    mario.moving = false;
+});
+
+// Code block below prevents the clicking of arrows keys from scrolling in active browser window
+window.addEventListener("keydown", function(event) {
     if([32, 37, 38, 39, 40].indexOf(event.keyCode) > -1) {
         event.preventDefault();
     }
@@ -58,4 +87,17 @@ function moveMario() {
         mario.frameY = 3;
         mario.moving = true;
     }
-}
+};
+
+function handleMarioFrame() {
+    if (mario.frameX < 3 && mario.moving) {
+        mario.frameX++;
+    }
+    else {
+        mario.frameX = 0;
+    }
+};
+
+// window.onload = function menu() {
+//     drawMario(marioSprite, mario.width & mario.frameX, mario.height * mario.frameY, mario.width, mario.height, mario.x, mario.y, mario.width, mario.height);
+// };
