@@ -477,16 +477,7 @@ collision1.src = "images/collision1.png"
 let collision2 = new Image();
 collision2.src = "images/collision2.png"
 
-// function collisionBetweenMarioAndBlackSpinyCheepCheep(first, second) {
-//     return! ( 
-//         first.x > second.x + second.width ||
-//         first.x + first.width < second.x ||
-//         first.y > second.y + second.height ||
-//         first.y + first.height < second.y
-//     )
-// };
-
-function collisionBetweenMarioAndFish(first, second) {
+function collisionBetweenMarioAndObject(first, second) {
     return! ( 
         first.x > second.x + second.width ||
         first.x + first.width < second.x ||
@@ -516,54 +507,64 @@ function animate() {
         handleMarioFrame();
         for (let i = 0; i < gCs.length; i++) {
             gCs[i].draw();
+            if (collisionBetweenMarioAndObject(mario, gCs[i])) {
+                gCs.splice(i, 1);
+            }
         }
         for (let i = 0; i < blaSCCs.length; i++) {
             blaSCCs[i].draw();
             blaSCCs[i].update();
-            if (collisionBetweenMarioAndFish(mario, blaSCCs[i])) {
-                context.drawImage(collision1, 0, 0, 55, 55, blaSCCs[i].x - 13, blaSCCs[i].y - 14, 55, 55)
+            if (collisionBetweenMarioAndObject(mario, blaSCCs[i])) {
+                context.drawImage(collision1, 0, 0, 55, 55, blaSCCs[i].x - 13, blaSCCs[i].y - 14, 55, 55);
+                blaSCCs.splice(i, 1);
             }
         }
         for (let i = 0; i < bluSCCs.length; i++) {
             bluSCCs[i].draw();
             bluSCCs[i].update();
-            if (collisionBetweenMarioAndFish(mario, bluSCCs[i])) {
-                context.drawImage(collision1, 0, 0, 55, 55, bluSCCs[i].x - 13, bluSCCs[i].y - 13, 55, 55)
+            if (collisionBetweenMarioAndObject(mario, bluSCCs[i])) {
+                context.drawImage(collision1, 0, 0, 55, 55, bluSCCs[i].x - 13, bluSCCs[i].y - 13, 55, 55);
+                bluSCCs.splice(i, 1);
             }
         }
         for (let i = 0; i < bBs.length; i++) {
             bBs[i].draw();
             bBs[i].update();
-            if (collisionBetweenMarioAndFish(mario, bBs[i])) {
-                context.drawImage(collision2, 0, 0, 75, 76, bBs[i].x - 20, bBs[i].y - 23, 75, 76)
+            if (collisionBetweenMarioAndObject(mario, bBs[i])) {
+                context.drawImage(collision2, 0, 0, 75, 76, bBs[i].x - 20, bBs[i].y - 23, 75, 76);
+                bBs.splice(i, 1);
             }
         }
         for (let i = 0; i < cCs.length; i++) {
             cCs[i].draw();
             cCs[i].update();
-            if (collisionBetweenMarioAndFish(mario, cCs[i])) {
-                context.drawImage(collision1, 0, 0, 55, 55, cCs[i].x - 12, cCs[i].y - 14, 55, 55)
+            if (collisionBetweenMarioAndObject(mario, cCs[i])) {
+                context.drawImage(collision1, 0, 0, 55, 55, cCs[i].x - 12, cCs[i].y - 14, 55, 55);
+                cCs.splice(i, 1);
             }
         }
         for (let i = 0; i < dCs.length; i++) {
             dCs[i].draw();
             dCs[i].update();
-            if (collisionBetweenMarioAndFish(mario, dCs[i])) {
-                context.drawImage(collision1, 0, 0, 55, 55, dCs[i].x - 11, dCs[i].y - 16, 55, 55)
+            if (collisionBetweenMarioAndObject(mario, dCs[i])) {
+                context.drawImage(collision1, 0, 0, 55, 55, dCs[i].x - 11, dCs[i].y - 16, 55, 55);
+                dCs.splice(i, 1);
             }
         }
         for (let i = 0; i < eCs.length; i++) {
             eCs[i].draw();
             eCs[i].update();
-            if (collisionBetweenMarioAndFish(mario, eCs[i])) {
-                context.drawImage(collision1, 0, 0, 55, 55, eCs[i].x - 11, eCs[i].y - 17, 55, 55)
+            if (collisionBetweenMarioAndObject(mario, eCs[i])) {
+                context.drawImage(collision1, 0, 0, 55, 55, eCs[i].x - 11, eCs[i].y - 17, 55, 55);
+                eCs.splice(i, 1);
             }
         }
         for (let i = 0; i < gSCCs.length; i++) {
             gSCCs[i].draw();
             gSCCs[i].update();
-            if (collisionBetweenMarioAndFish(mario, gSCCs[i])) {
-                context.drawImage(collision1, 0, 0, 55, 55, gSCCs[i].x - 13, gSCCs[i].y - 14, 55, 55)
+            if (collisionBetweenMarioAndObject(mario, gSCCs[i])) {
+                context.drawImage(collision1, 0, 0, 55, 55, gSCCs[i].x - 13, gSCCs[i].y - 14, 55, 55);
+                gSCCs.splice(i, 1);
             }
         }
     }
