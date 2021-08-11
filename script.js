@@ -10,8 +10,8 @@ let keys = [];
 let mario = {
     x: 0.5 * canvas.width,
     y: 0.5 * canvas.height,
-    width: 33,
-    height: 33,
+    width: 25,
+    height: 29,
     frameX: 3,
     frameY: 3,
     speed: 5,
