@@ -234,7 +234,7 @@ let cCs = [];
 
 class CC {
     constructor() {
-        this.width = 17;
+        this.width = 18;
         this.height = 16;
         this.frameX = 0;
         this.frameY = 0;
@@ -284,7 +284,7 @@ let dCs = [];
 
 class DC {
     constructor() {
-        this.width = 17;
+        this.width = 18;
         this.height = 16;
         this.frameX = 0;
         this.frameY = 0;
@@ -334,7 +334,7 @@ let eCs = [];
 
 class EC {
     constructor() {
-        this.width = 17;
+        this.width = 18;
         this.height = 16;
         this.frameX = 0;
         this.frameY = 0;
@@ -424,6 +424,53 @@ function drawGoldSpinyCheepCheep (img, sX, sY, sW, sH, dX, dY, dW, dH) {
     context.drawImage (img, sX, sY, sW, sH, dX, dY, dW, dH)
 };
 
+let goldCoins = {};
+goldCoins.goldCoin = new Image();
+goldCoins.goldCoin.src = "images/goldCoinSpriteSheet.png"
+
+let numberOfGCs = 5;
+let gCs = [];
+
+class GC {
+    constructor() {
+        this.width = 16;
+        this.height = 16;
+        this.frameX = 0;
+        this.frameY = 0;
+        this.x = Math.random() * ((canvas.width - this.height) - 0) + 0;
+        this.y = Math.random() * ((canvas.height - this.height) - 0) + 0;
+        // this.y = Math.random() * canvas.height;
+    }
+    draw() {
+        drawGoldCoin(goldCoins.goldCoin, this.width * this.frameX, this.height * this.frameY, this.width, this.height, this.x, this.y, this.width, this.height);
+        if (this.frameX < 3) {
+            this.frameX++;
+        }
+        else {
+            this.frameX = 0;
+        }
+    }
+    // update() {
+    //     if (this.action === "left") {
+    //         if (this.x > 0 - this.width) {
+    //             this.x -= this.speed;
+    //         }
+    //         else {
+    //             this.x = canvas.width + this.width;
+    //             this.y = Math.random() * ((canvas.height - this.height) - 0) + 0;
+    //         }
+    //     }
+    // }
+};
+
+for (let i = 0; i < numberOfGCs; i++) {
+    gCs.push(new GC())
+};
+
+function drawGoldCoin (img, sX, sY, sW, sH, dX, dY, dW, dH) {
+    context.drawImage (img, sX, sY, sW, sH, dX, dY, dW, dH)
+};
+
 let collision1 = new Image();
 collision1.src = "images/collision1.png"
 
@@ -467,6 +514,9 @@ function animate() {
         drawMario(marioSprite, mario.width * mario.frameX, mario.height * mario.frameY, mario.width, mario.height, mario.x, mario.y, mario.width, mario.height);
         moveMario();
         handleMarioFrame();
+        for (let i = 0; i < gCs.length; i++) {
+            gCs[i].draw();
+        }
         for (let i = 0; i < blaSCCs.length; i++) {
             blaSCCs[i].draw();
             blaSCCs[i].update();
