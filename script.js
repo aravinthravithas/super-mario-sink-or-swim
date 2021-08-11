@@ -509,6 +509,7 @@ function animate() {
             gCs[i].draw();
             if (collisionBetweenMarioAndObject(mario, gCs[i])) {
                 gCs.splice(i, 1);
+                gCs.push(new GC());
             }
         }
         for (let i = 0; i < blaSCCs.length; i++) {
@@ -517,6 +518,7 @@ function animate() {
             if (collisionBetweenMarioAndObject(mario, blaSCCs[i])) {
                 context.drawImage(collision1, 0, 0, 55, 55, blaSCCs[i].x - 13, blaSCCs[i].y - 14, 55, 55);
                 blaSCCs.splice(i, 1);
+                blaSCCs.push(new BlaSCC());
             }
         }
         for (let i = 0; i < bluSCCs.length; i++) {
@@ -525,6 +527,7 @@ function animate() {
             if (collisionBetweenMarioAndObject(mario, bluSCCs[i])) {
                 context.drawImage(collision1, 0, 0, 55, 55, bluSCCs[i].x - 13, bluSCCs[i].y - 13, 55, 55);
                 bluSCCs.splice(i, 1);
+                bluSCCs.push(new BluSCC());
             }
         }
         for (let i = 0; i < bBs.length; i++) {
@@ -533,6 +536,7 @@ function animate() {
             if (collisionBetweenMarioAndObject(mario, bBs[i])) {
                 context.drawImage(collision2, 0, 0, 75, 76, bBs[i].x - 20, bBs[i].y - 23, 75, 76);
                 bBs.splice(i, 1);
+                bBs.push(new BB());
             }
         }
         for (let i = 0; i < cCs.length; i++) {
@@ -541,6 +545,7 @@ function animate() {
             if (collisionBetweenMarioAndObject(mario, cCs[i])) {
                 context.drawImage(collision1, 0, 0, 55, 55, cCs[i].x - 12, cCs[i].y - 14, 55, 55);
                 cCs.splice(i, 1);
+                cCss.push(new CC());
             }
         }
         for (let i = 0; i < dCs.length; i++) {
@@ -549,6 +554,7 @@ function animate() {
             if (collisionBetweenMarioAndObject(mario, dCs[i])) {
                 context.drawImage(collision1, 0, 0, 55, 55, dCs[i].x - 11, dCs[i].y - 16, 55, 55);
                 dCs.splice(i, 1);
+                dCs.push(new DC());
             }
         }
         for (let i = 0; i < eCs.length; i++) {
@@ -557,6 +563,7 @@ function animate() {
             if (collisionBetweenMarioAndObject(mario, eCs[i])) {
                 context.drawImage(collision1, 0, 0, 55, 55, eCs[i].x - 11, eCs[i].y - 17, 55, 55);
                 eCs.splice(i, 1);
+                eCs.push(new EC());
             }
         }
         for (let i = 0; i < gSCCs.length; i++) {
@@ -565,6 +572,7 @@ function animate() {
             if (collisionBetweenMarioAndObject(mario, gSCCs[i])) {
                 context.drawImage(collision1, 0, 0, 55, 55, gSCCs[i].x - 13, gSCCs[i].y - 14, 55, 55);
                 gSCCs.splice(i, 1);
+                gSCCs.push(new GSCC());
             }
         }
     }
