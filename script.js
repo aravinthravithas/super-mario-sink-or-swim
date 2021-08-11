@@ -124,6 +124,306 @@ function drawBlackSpinyCheepCheep (img, sX, sY, sW, sH, dX, dY, dW, dH) {
     context.drawImage (img, sX, sY, sW, sH, dX, dY, dW, dH)
 };
 
+let blueSpinyCheepCheeps = {};
+blueSpinyCheepCheeps.blueSpinyCheepCheep = new Image();
+blueSpinyCheepCheeps.blueSpinyCheepCheep.src = "images/blueSpinyCheepCheepSpriteSheet.png"
+
+let bluSCCAction = ["left"];
+let numberOfBluSCCs = 10;
+let bluSCCs = [];
+
+class BluSCC {
+    constructor() {
+        this.width = 17;
+        this.height = 16;
+        this.frameX = 0;
+        this.frameY = 0;
+        this.x = canvas.width;
+        this.y = Math.random() * ((canvas.height - this.height) - 0) + 0;
+        // this.y = Math.random() * canvas.height;
+        this.speed = (Math.random() * 5) + 6;
+        this.action = "left";
+    }
+    draw() {
+        drawBlueSpinyCheepCheep(blueSpinyCheepCheeps.blueSpinyCheepCheep, this.width * this.frameX, this.height * this.frameY, this.width, this.height, this.x, this.y, this.width, this.height);
+        if (this.frameX < 1) {
+            this.frameX++;
+        }
+        else {
+            this.frameX = 0;
+        }
+    }
+    update() {
+        if (this.action === "left") {
+            if (this.x > 0 - this.width) {
+                this.x -= this.speed;
+            }
+            else {
+                this.x = canvas.width + this.width;
+                this.y = Math.random() * ((canvas.height - this.height) - 0) + 0;
+            }
+        }
+    }
+};
+
+for (let i = 0; i < numberOfBluSCCs; i++) {
+    blaSCCs.push(new BluSCC())
+};
+
+function drawBlueSpinyCheepCheep (img, sX, sY, sW, sH, dX, dY, dW, dH) {
+    context.drawImage (img, sX, sY, sW, sH, dX, dY, dW, dH)
+};
+
+let bossBasses = {};
+bossBasses.bossBass = new Image();
+bossBasses.bossBass.src = "images/bossBassSpriteSheet.png"
+
+let bBAction = ["left"];
+let numberOfBBs = 5;
+let bBs = [];
+
+class BB {
+    constructor() {
+        this.width = 25;
+        this.height = 32;
+        this.frameX = 0;
+        this.frameY = 0;
+        this.x = canvas.width;
+        this.y = Math.random() * ((canvas.height - this.height) - 0) + 0;
+        // this.y = Math.random() * canvas.height;
+        this.speed = (Math.random() * 5) + 3;
+        this.action = "left";
+    }
+    draw() {
+        drawBossBass(bossBasses.bossBass, this.width * this.frameX, this.height * this.frameY, this.width, this.height, this.x, this.y, this.width, this.height);
+        if (this.frameX < 3) {
+            this.frameX++;
+        }
+        else {
+            this.frameX = 0;
+        }
+    }
+    update() {
+        if (this.action === "left") {
+            if (this.x > 0 - this.width) {
+                this.x -= this.speed;
+            }
+            else {
+                this.x = canvas.width + this.width;
+                this.y = Math.random() * ((canvas.height - this.height) - 0) + 0;
+            }
+        }
+    }
+};
+
+for (let i = 0; i < numberOfBBs; i++) {
+    bBs.push(new BB())
+};
+
+function drawBossBass (img, sX, sY, sW, sH, dX, dY, dW, dH) {
+    context.drawImage (img, sX, sY, sW, sH, dX, dY, dW, dH)
+};
+
+let cheepCheeps = {};
+cheepCheeps.cheepCheep = new Image();
+cheepCheeps.cheepCheep.src = "images/cheepCheepSpriteSheet.png"
+
+let cCAction = ["left"];
+let numberOfCCs = 15;
+let cCs = [];
+
+class CC {
+    constructor() {
+        this.width = 17;
+        this.height = 16;
+        this.frameX = 0;
+        this.frameY = 0;
+        this.x = canvas.width;
+        this.y = Math.random() * ((canvas.height - this.height) - 0) + 0;
+        // this.y = Math.random() * canvas.height;
+        this.speed = (Math.random() * 5) + 8;
+        this.action = "left";
+    }
+    draw() {
+        drawCheepCheep(cheepCheeps.cheepCheep, this.width * this.frameX, this.height * this.frameY, this.width, this.height, this.x, this.y, this.width, this.height);
+        if (this.frameX < 1) {
+            this.frameX++;
+        }
+        else {
+            this.frameX = 0;
+        }
+    }
+    update() {
+        if (this.action === "left") {
+            if (this.x > 0 - this.width) {
+                this.x -= this.speed;
+            }
+            else {
+                this.x = canvas.width + this.width;
+                this.y = Math.random() * ((canvas.height - this.height) - 0) + 0;
+            }
+        }
+    }
+};
+
+for (let i = 0; i < numberOfCCs; i++) {
+    cCs.push(new CC())
+};
+
+function drawCheepCheep (img, sX, sY, sW, sH, dX, dY, dW, dH) {
+    context.drawImage (img, sX, sY, sW, sH, dX, dY, dW, dH)
+};
+
+let deepCheeps = {};
+deepCheeps.deepCheep = new Image();
+deepCheeps.deepCheep.src = "images/deepCheepSpriteSheet.png"
+
+let dCAction = ["left"];
+let numberOfDCs = 10;
+let dCs = [];
+
+class DC {
+    constructor() {
+        this.width = 17;
+        this.height = 16;
+        this.frameX = 0;
+        this.frameY = 0;
+        this.x = canvas.width;
+        this.y = Math.random() * ((canvas.height - this.height) - 0) + 0;
+        // this.y = Math.random() * canvas.height;
+        this.speed = (Math.random() * 5) + 7;
+        this.action = "left";
+    }
+    draw() {
+        drawDeepCheep(deepCheeps.deepCheep, this.width * this.frameX, this.height * this.frameY, this.width, this.height, this.x, this.y, this.width, this.height);
+        if (this.frameX < 1) {
+            this.frameX++;
+        }
+        else {
+            this.frameX = 0;
+        }
+    }
+    update() {
+        if (this.action === "left") {
+            if (this.x > 0 - this.width) {
+                this.x -= this.speed;
+            }
+            else {
+                this.x = canvas.width + this.width;
+                this.y = Math.random() * ((canvas.height - this.height) - 0) + 0;
+            }
+        }
+    }
+};
+
+for (let i = 0; i < numberOfDCs; i++) {
+    cCs.push(new DC())
+};
+
+function drawDeepCheep (img, sX, sY, sW, sH, dX, dY, dW, dH) {
+    context.drawImage (img, sX, sY, sW, sH, dX, dY, dW, dH)
+};
+
+let eepCheeps = {};
+eepCheeps.eepCheep = new Image();
+eepCheeps.eepCheep.src = "images/eepCheepSpriteSheet.png"
+
+let eCAction = ["left"];
+let numberOfECs = 10;
+let eCs = [];
+
+class EC {
+    constructor() {
+        this.width = 17;
+        this.height = 16;
+        this.frameX = 0;
+        this.frameY = 0;
+        this.x = canvas.width;
+        this.y = Math.random() * ((canvas.height - this.height) - 0) + 0;
+        // this.y = Math.random() * canvas.height;
+        this.speed = (Math.random() * 5) + 10;
+        this.action = "left";
+    }
+    draw() {
+        drawEepCheep(eepCheeps.eepCheep, this.width * this.frameX, this.height * this.frameY, this.width, this.height, this.x, this.y, this.width, this.height);
+        if (this.frameX < 1) {
+            this.frameX++;
+        }
+        else {
+            this.frameX = 0;
+        }
+    }
+    update() {
+        if (this.action === "left") {
+            if (this.x > 0 - this.width) {
+                this.x -= this.speed;
+            }
+            else {
+                this.x = canvas.width + this.width;
+                this.y = Math.random() * ((canvas.height - this.height) - 0) + 0;
+            }
+        }
+    }
+};
+
+for (let i = 0; i < numberOfECs; i++) {
+    eCs.push(new EC())
+};
+
+function drawEepCheep (img, sX, sY, sW, sH, dX, dY, dW, dH) {
+    context.drawImage (img, sX, sY, sW, sH, dX, dY, dW, dH)
+};
+
+let goldSpinyCheepCheeps = {};
+goldSpinyCheepCheeps.goldSpinyCheepCheep = new Image();
+goldSpinyCheepCheeps.goldSpinyCheepCheep.src = "images/goldSpinyCheepCheepSpriteSheet.png"
+
+let gSCCAction = ["left"];
+let numberOfGSCCs = 10;
+let gSCCs = [];
+
+class GSCC {
+    constructor() {
+        this.width = 17;
+        this.height = 16;
+        this.frameX = 0;
+        this.frameY = 0;
+        this.x = canvas.width;
+        this.y = Math.random() * ((canvas.height - this.height) - 0) + 0;
+        // this.y = Math.random() * canvas.height;
+        this.speed = (Math.random() * 5) + 9;
+        this.action = "left";
+    }
+    draw() {
+        drawGoldSpinyCheepCheep(goldSpinyCheepCheeps.goldSpinyCheepCheep, this.width * this.frameX, this.height * this.frameY, this.width, this.height, this.x, this.y, this.width, this.height);
+        if (this.frameX < 1) {
+            this.frameX++;
+        }
+        else {
+            this.frameX = 0;
+        }
+    }
+    update() {
+        if (this.action === "left") {
+            if (this.x > 0 - this.width) {
+                this.x -= this.speed;
+            }
+            else {
+                this.x = canvas.width + this.width;
+                this.y = Math.random() * ((canvas.height - this.height) - 0) + 0;
+            }
+        }
+    }
+};
+
+for (let i = 0; i < numberOfGSCCs; i++) {
+    gSCCs.push(new GSCC())
+};
+
+function drawGoldSpinyCheepCheep (img, sX, sY, sW, sH, dX, dY, dW, dH) {
+    context.drawImage (img, sX, sY, sW, sH, dX, dY, dW, dH)
+};
+
 let fps, fpsInterval, startTime, now, then, elapsed;
 
 function startAnimating(fps) {
@@ -146,6 +446,30 @@ function animate() {
         for (let i = 0; i < blaSCCs.length; i++) {
             blaSCCs[i].draw();
             blaSCCs[i].update();
+        }
+        for (let i = 0; i < bluSCCs.length; i++) {
+            blaSCCs[i].draw();
+            blaSCCs[i].update();
+        }
+        for (let i = 0; i < bBs.length; i++) {
+            bBs[i].draw();
+            bBs[i].update();
+        }
+        for (let i = 0; i < cCs.length; i++) {
+            cCs[i].draw();
+            cCs[i].update();
+        }
+        for (let i = 0; i < dCs.length; i++) {
+            cCs[i].draw();
+            cCs[i].update();
+        }
+        for (let i = 0; i < eCs.length; i++) {
+            eCs[i].draw();
+            eCs[i].update();
+        }
+        for (let i = 0; i < gSCCs.length; i++) {
+            gSCCs[i].draw();
+            gSCCs[i].update();
         }
     }
 }
