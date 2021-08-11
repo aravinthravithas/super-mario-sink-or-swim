@@ -88,10 +88,11 @@ class BlaSCC {
         this.height = 16;
         this.frameX = 0;
         this.frameY = 0;
-        this.x = canvas.width;
+        // this.x = canvas.width;
+        this.x = canvas.width + (Math.random() * 200);
         this.y = Math.random() * ((canvas.height - this.height) - 0) + 0;
         // this.y = Math.random() * canvas.height;
-        this.speed = (Math.random() * 5) + 5;
+        this.speed = (Math.random() * 5) + 7;
         this.action = "left";
     }
     draw() {
@@ -138,10 +139,11 @@ class BluSCC {
         this.height = 16;
         this.frameX = 0;
         this.frameY = 0;
-        this.x = canvas.width;
+        // this.x = canvas.width;
+        this.x = canvas.width + (Math.random() * 200);
         this.y = Math.random() * ((canvas.height - this.height) - 0) + 0;
         // this.y = Math.random() * canvas.height;
-        this.speed = (Math.random() * 5) + 6;
+        this.speed = (Math.random() * 5) + 8;
         this.action = "left";
     }
     draw() {
@@ -179,7 +181,7 @@ bossBasses.bossBass = new Image();
 bossBasses.bossBass.src = "images/bossBassSpriteSheet.png"
 
 let bBAction = ["left"];
-let numberOfBBs = 5;
+let numberOfBBs = 10;
 let bBs = [];
 
 class BB {
@@ -188,10 +190,11 @@ class BB {
         this.height = 32;
         this.frameX = 0;
         this.frameY = 0;
-        this.x = canvas.width;
+        // this.x = canvas.width;
+        this.x = canvas.width + (Math.random() * 200);
         this.y = Math.random() * ((canvas.height - this.height) - 0) + 0;
         // this.y = Math.random() * canvas.height;
-        this.speed = (Math.random() * 5) + 3;
+        this.speed = (Math.random() * 5) + 1;
         this.action = "left";
     }
     draw() {
@@ -238,10 +241,11 @@ class CC {
         this.height = 16;
         this.frameX = 0;
         this.frameY = 0;
-        this.x = canvas.width;
+        // this.x = canvas.width;
+        this.x = canvas.width + (Math.random() * 200);
         this.y = Math.random() * ((canvas.height - this.height) - 0) + 0;
         // this.y = Math.random() * canvas.height;
-        this.speed = (Math.random() * 5) + 8;
+        this.speed = (Math.random() * 5) + 4;
         this.action = "left";
     }
     draw() {
@@ -279,7 +283,7 @@ deepCheeps.deepCheep = new Image();
 deepCheeps.deepCheep.src = "images/deepCheepSpriteSheet.png"
 
 let dCAction = ["left"];
-let numberOfDCs = 10;
+let numberOfDCs = 15;
 let dCs = [];
 
 class DC {
@@ -288,10 +292,11 @@ class DC {
         this.height = 16;
         this.frameX = 0;
         this.frameY = 0;
-        this.x = canvas.width;
+        // this.x = canvas.width;
+        this.x = canvas.width + (Math.random() * 200);
         this.y = Math.random() * ((canvas.height - this.height) - 0) + 0;
         // this.y = Math.random() * canvas.height;
-        this.speed = (Math.random() * 5) + 7;
+        this.speed = (Math.random() * 5) + 5;
         this.action = "left";
     }
     draw() {
@@ -329,7 +334,7 @@ eepCheeps.eepCheep = new Image();
 eepCheeps.eepCheep.src = "images/eepCheepSpriteSheet.png"
 
 let eCAction = ["left"];
-let numberOfECs = 10;
+let numberOfECs = 30;
 let eCs = [];
 
 class EC {
@@ -338,10 +343,11 @@ class EC {
         this.height = 16;
         this.frameX = 0;
         this.frameY = 0;
-        this.x = canvas.width;
+        // this.x = canvas.width;
+        this.x = canvas.width + (Math.random() * 200);
         this.y = Math.random() * ((canvas.height - this.height) - 0) + 0;
         // this.y = Math.random() * canvas.height;
-        this.speed = (Math.random() * 5) + 10;
+        this.speed = (Math.random() * 5) + 3;
         this.action = "left";
     }
     draw() {
@@ -379,7 +385,7 @@ goldSpinyCheepCheeps.goldSpinyCheepCheep = new Image();
 goldSpinyCheepCheeps.goldSpinyCheepCheep.src = "images/goldSpinyCheepCheepSpriteSheet.png"
 
 let gSCCAction = ["left"];
-let numberOfGSCCs = 10;
+let numberOfGSCCs = 5;
 let gSCCs = [];
 
 class GSCC {
@@ -388,10 +394,11 @@ class GSCC {
         this.height = 16;
         this.frameX = 0;
         this.frameY = 0;
-        this.x = canvas.width;
+        // this.x = canvas.width;
+        this.x = canvas.width + (Math.random() * 200);
         this.y = Math.random() * ((canvas.height - this.height) - 0) + 0;
         // this.y = Math.random() * canvas.height;
-        this.speed = (Math.random() * 5) + 9;
+        this.speed = (Math.random() * 5) + 10;
         this.action = "left";
     }
     draw() {
