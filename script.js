@@ -25,30 +25,6 @@ function drawMario(img, sX, sY, sW, sH, dX, dY, dW, dH) {
     context.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH)
 };
 
-let fps, fpsInterval, startTime, now, then, elapsed;
-
-function startAnimating(fps) {
-    fpsInterval = 1000/fps;
-    then = Date.now();
-    startTime = then;
-    animate();
-}
-
-function animate() {
-    requestAnimationFrame(animate);
-    now = Date.now();
-    elapsed = now - then;
-    if (elapsed > fpsInterval) {
-        then = now - (elapsed % fpsInterval);
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        drawMario(marioSprite, mario.width * mario.frameX, mario.height * mario.frameY, mario.width, mario.height, mario.x, mario.y, mario.width, mario.height);
-        moveMario();
-        handleMarioFrame();
-    }
-}
-
-startAnimating(10);
-
 window.addEventListener("keydown", function(event) {
     keys[event.keyCode] = true;
     mario.moving = true;
@@ -97,6 +73,84 @@ function handleMarioFrame() {
         mario.frameX = 0;
     }
 };
+
+let blackSpinyCheepCheeps = {};
+blackSpinyCheepCheeps.blackSpinyCheepCheep = new Image();
+blackSpinyCheepCheeps.blackSpinyCheepCheep.src = "images/blackSpinyCheepCheepSpriteSheet.png"
+
+let blaSCCAction = ["left"];
+let numberOfBlaSCCs = 10;
+let blaSCCs = [];
+
+class BlaSCC {
+    constructor() {
+        this.width = 17;
+        this.height = 16;
+        this.frameX = 0;
+        this.frameY = 0;
+        this.x = canvas.width;
+        this.y = Math.random() * ((canvas.height - this.height) - 0) + 0;
+        // this.y = Math.random() * canvas.height;
+        this.speed = (Math.random() * 5) + 5;
+        this.action = "left";
+    }
+    draw() {
+        drawBlackSpinyCheepCheep(blackSpinyCheepCheeps.blackSpinyCheepCheep, this.width * this.frameX, this.height * this.frameY, this.width, this.height, this.x, this.y, this.width, this.height);
+        if (this.frameX < 1) {
+            this.frameX++;
+        }
+        else {
+            this.frameX = 0;
+        }
+    }
+    update() {
+        if (this.action === "left") {
+            if (this.x > 0 - this.width) {
+                this.x -= this.speed;
+            }
+            else {
+                this.x = canvas.width + this.width;
+                this.y = Math.random() * ((canvas.height - this.height) - 0) + 0;
+            }
+        }
+    }
+};
+
+for (let i = 0; i < numberOfBlaSCCs; i++) {
+    blaSCCs.push(new BlaSCC())
+};
+
+function drawBlackSpinyCheepCheep (img, sX, sY, sW, sH, dX, dY, dW, dH) {
+    context.drawImage (img, sX, sY, sW, sH, dX, dY, dW, dH)
+};
+
+let fps, fpsInterval, startTime, now, then, elapsed;
+
+function startAnimating(fps) {
+    fpsInterval = 1000/fps;
+    then = Date.now();
+    startTime = then;
+    animate();
+}
+
+function animate() {
+    requestAnimationFrame(animate);
+    now = Date.now();
+    elapsed = now - then;
+    if (elapsed > fpsInterval) {
+        then = now - (elapsed % fpsInterval);
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        drawMario(marioSprite, mario.width * mario.frameX, mario.height * mario.frameY, mario.width, mario.height, mario.x, mario.y, mario.width, mario.height);
+        moveMario();
+        handleMarioFrame();
+        for (let i = 0; i < blaSCCs.length; i++) {
+            blaSCCs[i].draw();
+            blaSCCs[i].update();
+        }
+    }
+}
+
+startAnimating(10);
 
 // window.onload = function menu() {
 //     drawMario(marioSprite, mario.width & mario.frameX, mario.height * mario.frameY, mario.width, mario.height, mario.x, mario.y, mario.width, mario.height);
