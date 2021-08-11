@@ -88,10 +88,8 @@ class BlaSCC {
         this.height = 16;
         this.frameX = 0;
         this.frameY = 0;
-        // this.x = canvas.width;
         this.x = canvas.width + (Math.random() * 200);
         this.y = Math.random() * ((canvas.height - this.height) - 0) + 0;
-        // this.y = Math.random() * canvas.height;
         this.speed = (Math.random() * 5) + 7;
         this.action = "left";
     }
@@ -139,10 +137,8 @@ class BluSCC {
         this.height = 16;
         this.frameX = 0;
         this.frameY = 0;
-        // this.x = canvas.width;
         this.x = canvas.width + (Math.random() * 200);
         this.y = Math.random() * ((canvas.height - this.height) - 0) + 0;
-        // this.y = Math.random() * canvas.height;
         this.speed = (Math.random() * 5) + 8;
         this.action = "left";
     }
@@ -190,10 +186,8 @@ class BB {
         this.height = 32;
         this.frameX = 0;
         this.frameY = 0;
-        // this.x = canvas.width;
         this.x = canvas.width + (Math.random() * 200);
         this.y = Math.random() * ((canvas.height - this.height) - 0) + 0;
-        // this.y = Math.random() * canvas.height;
         this.speed = (Math.random() * 5) + 1;
         this.action = "left";
     }
@@ -241,10 +235,8 @@ class CC {
         this.height = 16;
         this.frameX = 0;
         this.frameY = 0;
-        // this.x = canvas.width;
         this.x = canvas.width + (Math.random() * 200);
         this.y = Math.random() * ((canvas.height - this.height) - 0) + 0;
-        // this.y = Math.random() * canvas.height;
         this.speed = (Math.random() * 5) + 4;
         this.action = "left";
     }
@@ -292,10 +284,8 @@ class DC {
         this.height = 16;
         this.frameX = 0;
         this.frameY = 0;
-        // this.x = canvas.width;
         this.x = canvas.width + (Math.random() * 200);
         this.y = Math.random() * ((canvas.height - this.height) - 0) + 0;
-        // this.y = Math.random() * canvas.height;
         this.speed = (Math.random() * 5) + 5;
         this.action = "left";
     }
@@ -343,10 +333,8 @@ class EC {
         this.height = 16;
         this.frameX = 0;
         this.frameY = 0;
-        // this.x = canvas.width;
         this.x = canvas.width + (Math.random() * 200);
         this.y = Math.random() * ((canvas.height - this.height) - 0) + 0;
-        // this.y = Math.random() * canvas.height;
         this.speed = (Math.random() * 5) + 3;
         this.action = "left";
     }
@@ -394,10 +382,8 @@ class GSCC {
         this.height = 16;
         this.frameX = 0;
         this.frameY = 0;
-        // this.x = canvas.width;
         this.x = canvas.width + (Math.random() * 200);
         this.y = Math.random() * ((canvas.height - this.height) - 0) + 0;
-        // this.y = Math.random() * canvas.height;
         this.speed = (Math.random() * 5) + 10;
         this.action = "left";
     }
@@ -504,7 +490,6 @@ function animate() {
             if (collisionBetweenMarioAndObject(mario, gCs[i])) {
                 gCs.splice(i, 1);
                 gCs.push(new GC());
-                // gCs[i].draw();
             }
             gCs[i].draw();
         }
