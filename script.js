@@ -439,7 +439,6 @@ class GC {
         this.frameY = 0;
         this.x = Math.random() * ((canvas.width - this.height) - 0) + 0;
         this.y = Math.random() * ((canvas.height - this.height) - 0) + 0;
-        // this.y = Math.random() * canvas.height;
     }
     draw() {
         drawGoldCoin(goldCoins.goldCoin, this.width * this.frameX, this.height * this.frameY, this.width, this.height, this.x, this.y, this.width, this.height);
@@ -450,17 +449,6 @@ class GC {
             this.frameX = 0;
         }
     }
-    // update() {
-    //     if (this.action === "left") {
-    //         if (this.x > 0 - this.width) {
-    //             this.x -= this.speed;
-    //         }
-    //         else {
-    //             this.x = canvas.width + this.width;
-    //             this.y = Math.random() * ((canvas.height - this.height) - 0) + 0;
-    //         }
-    //     }
-    // }
 };
 
 for (let i = 0; i < numberOfGCs; i++) {
@@ -506,74 +494,75 @@ function animate() {
         moveMario();
         handleMarioFrame();
         for (let i = 0; i < gCs.length; i++) {
-            gCs[i].draw();
             if (collisionBetweenMarioAndObject(mario, gCs[i])) {
                 gCs.splice(i, 1);
                 gCs.push(new GC());
+                // gCs[i].draw();
             }
+            gCs[i].draw();
         }
         for (let i = 0; i < blaSCCs.length; i++) {
-            blaSCCs[i].draw();
-            blaSCCs[i].update();
             if (collisionBetweenMarioAndObject(mario, blaSCCs[i])) {
                 context.drawImage(collision1, 0, 0, 55, 55, blaSCCs[i].x - 13, blaSCCs[i].y - 14, 55, 55);
                 blaSCCs.splice(i, 1);
                 blaSCCs.push(new BlaSCC());
             }
+            blaSCCs[i].draw();
+            blaSCCs[i].update();
         }
         for (let i = 0; i < bluSCCs.length; i++) {
-            bluSCCs[i].draw();
-            bluSCCs[i].update();
             if (collisionBetweenMarioAndObject(mario, bluSCCs[i])) {
                 context.drawImage(collision1, 0, 0, 55, 55, bluSCCs[i].x - 13, bluSCCs[i].y - 13, 55, 55);
                 bluSCCs.splice(i, 1);
                 bluSCCs.push(new BluSCC());
             }
+            bluSCCs[i].draw();
+            bluSCCs[i].update();
         }
         for (let i = 0; i < bBs.length; i++) {
-            bBs[i].draw();
-            bBs[i].update();
             if (collisionBetweenMarioAndObject(mario, bBs[i])) {
                 context.drawImage(collision2, 0, 0, 75, 76, bBs[i].x - 20, bBs[i].y - 23, 75, 76);
                 bBs.splice(i, 1);
                 bBs.push(new BB());
             }
+            bBs[i].draw();
+            bBs[i].update();
         }
         for (let i = 0; i < cCs.length; i++) {
-            cCs[i].draw();
-            cCs[i].update();
             if (collisionBetweenMarioAndObject(mario, cCs[i])) {
                 context.drawImage(collision1, 0, 0, 55, 55, cCs[i].x - 12, cCs[i].y - 14, 55, 55);
                 cCs.splice(i, 1);
-                cCss.push(new CC());
+                cCs.push(new CC());
             }
+            cCs[i].draw();
+            cCs[i].update();
         }
         for (let i = 0; i < dCs.length; i++) {
-            dCs[i].draw();
-            dCs[i].update();
             if (collisionBetweenMarioAndObject(mario, dCs[i])) {
                 context.drawImage(collision1, 0, 0, 55, 55, dCs[i].x - 11, dCs[i].y - 16, 55, 55);
                 dCs.splice(i, 1);
                 dCs.push(new DC());
             }
+            dCs[i].draw();
+            dCs[i].update();
         }
         for (let i = 0; i < eCs.length; i++) {
-            eCs[i].draw();
-            eCs[i].update();
             if (collisionBetweenMarioAndObject(mario, eCs[i])) {
                 context.drawImage(collision1, 0, 0, 55, 55, eCs[i].x - 11, eCs[i].y - 17, 55, 55);
                 eCs.splice(i, 1);
                 eCs.push(new EC());
             }
+            eCs[i].draw();
+            eCs[i].update();
         }
         for (let i = 0; i < gSCCs.length; i++) {
-            gSCCs[i].draw();
-            gSCCs[i].update();
             if (collisionBetweenMarioAndObject(mario, gSCCs[i])) {
                 context.drawImage(collision1, 0, 0, 55, 55, gSCCs[i].x - 13, gSCCs[i].y - 14, 55, 55);
                 gSCCs.splice(i, 1);
                 gSCCs.push(new GSCC());
             }
+            gSCCs[i].draw();
+            gSCCs[i].update();
         }
     }
 }
