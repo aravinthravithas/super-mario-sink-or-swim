@@ -4,6 +4,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let context = canvas.getContext('2d');
+context.imageSmoothingEnabled = false;
 
 let keys = [];
 
@@ -421,7 +422,7 @@ let goldCoins = {};
 goldCoins.goldCoin = new Image();
 goldCoins.goldCoin.src = "images/goldCoinSpriteSheet.png"
 
-let numberOfGCs = 5;
+let numberOfGCs = 1;
 let gCs = [];
 
 class GC {
