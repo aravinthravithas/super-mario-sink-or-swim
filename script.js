@@ -467,6 +467,28 @@ function collisionBetweenMarioAndObject(first, second) {
     )
 };
 
+let objectData = [
+    {objectArray: blaSCCs, sourceWidth: 55, sourceHeight: 55, xAxisOffset: 13, yAxisOffset: 14, destinationWidth: 55, destinationHeight: 55, objectClass: BlaSCC},
+    {objectArray: bluSCCs, sourceWidth: 55, sourceHeight: 55, xAxisOffset: 13, yAxisOffset: 13, destinationWidth: 55, destinationHeight: 55, objectClass: BluSCC},
+    {objectArray: bBs, sourceWidth: 75, sourceHeight: 76, xAxisOffset: 20, yAxisOffset: 23, destinationWidth: 75, destinationHeight: 76, objectClass: BB},
+    {objectArray: cCs, sourceWidth: 55, sourceHeight: 55, xAxisOffset: 12, yAxisOffset: 14, destinationWidth: 55, destinationHeight: 55, objectClass: CC},
+    {objectArray: dCs, sourceWidth: 55, sourceHeight: 55, xAxisOffset: 11, yAxisOffset: 16, destinationWidth: 55, destinationHeight: 55, objectClass: DC},
+    {objectArray: eCs, sourceWidth: 55, sourceHeight: 55, xAxisOffset: 11, yAxisOffset: 17, destinationWidth: 55, destinationHeight: 55, objectClass: EC},
+    {objectArray: gSCCs, sourceWidth: 55, sourceHeight: 55, xAxisOffset: 13, yAxisOffset: 14, destinationWidth: 55, destinationHeight: 55, objectClass: GSCC},
+];
+
+function drawAndOrUpdateObjects(objectArray, sourceWidth, sourceHeight, xAxisOffset, yAxisOffset, destinationWidth, destinationHeight, objectClass) {
+    for (let i = 0; i < objectArray.length; i++) {
+        if (collisionBetweenMarioAndObject(mario, objectArray[i])) {
+            context.drawImage(collision1, 0, 0, sourceWidth, sourceHeight, objectArray[i].x - xAxisOffset, objectArray[i].y - yAxisOffset, destinationWidth, destinationHeight);
+            objectArray.splice(i, 1);
+            objectArray.push(new objectClass());
+        }
+        objectArray[i].draw();
+        objectArray[i].update();
+    }
+};
+
 let fps, fpsInterval, startTime, now, then, elapsed;
 
 function startAnimating(fps) {
@@ -493,69 +515,94 @@ function animate() {
             }
             gCs[i].draw();
         }
-        for (let i = 0; i < blaSCCs.length; i++) {
-            if (collisionBetweenMarioAndObject(mario, blaSCCs[i])) {
-                context.drawImage(collision1, 0, 0, 55, 55, blaSCCs[i].x - 13, blaSCCs[i].y - 14, 55, 55);
-                blaSCCs.splice(i, 1);
-                blaSCCs.push(new BlaSCC());
-            }
-            blaSCCs[i].draw();
-            blaSCCs[i].update();
-        }
-        for (let i = 0; i < bluSCCs.length; i++) {
-            if (collisionBetweenMarioAndObject(mario, bluSCCs[i])) {
-                context.drawImage(collision1, 0, 0, 55, 55, bluSCCs[i].x - 13, bluSCCs[i].y - 13, 55, 55);
-                bluSCCs.splice(i, 1);
-                bluSCCs.push(new BluSCC());
-            }
-            bluSCCs[i].draw();
-            bluSCCs[i].update();
-        }
-        for (let i = 0; i < bBs.length; i++) {
-            if (collisionBetweenMarioAndObject(mario, bBs[i])) {
-                context.drawImage(collision2, 0, 0, 75, 76, bBs[i].x - 20, bBs[i].y - 23, 75, 76);
-                bBs.splice(i, 1);
-                bBs.push(new BB());
-            }
-            bBs[i].draw();
-            bBs[i].update();
-        }
-        for (let i = 0; i < cCs.length; i++) {
-            if (collisionBetweenMarioAndObject(mario, cCs[i])) {
-                context.drawImage(collision1, 0, 0, 55, 55, cCs[i].x - 12, cCs[i].y - 14, 55, 55);
-                cCs.splice(i, 1);
-                cCs.push(new CC());
-            }
-            cCs[i].draw();
-            cCs[i].update();
-        }
-        for (let i = 0; i < dCs.length; i++) {
-            if (collisionBetweenMarioAndObject(mario, dCs[i])) {
-                context.drawImage(collision1, 0, 0, 55, 55, dCs[i].x - 11, dCs[i].y - 16, 55, 55);
-                dCs.splice(i, 1);
-                dCs.push(new DC());
-            }
-            dCs[i].draw();
-            dCs[i].update();
-        }
-        for (let i = 0; i < eCs.length; i++) {
-            if (collisionBetweenMarioAndObject(mario, eCs[i])) {
-                context.drawImage(collision1, 0, 0, 55, 55, eCs[i].x - 11, eCs[i].y - 17, 55, 55);
-                eCs.splice(i, 1);
-                eCs.push(new EC());
-            }
-            eCs[i].draw();
-            eCs[i].update();
-        }
-        for (let i = 0; i < gSCCs.length; i++) {
-            if (collisionBetweenMarioAndObject(mario, gSCCs[i])) {
-                context.drawImage(collision1, 0, 0, 55, 55, gSCCs[i].x - 13, gSCCs[i].y - 14, 55, 55);
-                gSCCs.splice(i, 1);
-                gSCCs.push(new GSCC());
-            }
-            gSCCs[i].draw();
-            gSCCs[i].update();
-        }
+
+        objectData.forEach(function(object) {
+            drawAndOrUpdateObjects(object.objectArray, object.sourceWidth, object.sourceHeight, object.xAxisOffset, object.yAxisOffset, object.destinationWidth, object.destinationHeight, object.objectClass)
+        });
+
+        // for (let i = 0; i < blaSCCs.length; i++) {
+        //     if (collisionBetweenMarioAndObject(mario, blaSCCs[i])) {
+        //         context.drawImage(collision1, 0, 0, 55, 55, blaSCCs[i].x - 13, blaSCCs[i].y - 14, 55, 55);
+        //         blaSCCs.splice(i, 1);
+        //         blaSCCs.push(new BlaSCC());
+        //     }
+        //     blaSCCs[i].draw();
+        //     blaSCCs[i].update();
+        // }
+
+        // drawAndOrUpdateObjects(blaSCCs, 55, 55, 13, 14, 55, 55, BlaSCC);
+
+        // for (let i = 0; i < bluSCCs.length; i++) {
+        //     if (collisionBetweenMarioAndObject(mario, bluSCCs[i])) {
+        //         context.drawImage(collision1, 0, 0, 55, 55, bluSCCs[i].x - 13, bluSCCs[i].y - 13, 55, 55);
+        //         bluSCCs.splice(i, 1);
+        //         bluSCCs.push(new BluSCC());
+        //     }
+        //     bluSCCs[i].draw();
+        //     bluSCCs[i].update();
+        // }
+
+        // drawAndOrUpdateObjects(bluSCCs, 55, 55, 13, 13, 55, 55, BluSCC);
+
+        // for (let i = 0; i < bBs.length; i++) {
+        //     if (collisionBetweenMarioAndObject(mario, bBs[i])) {
+        //         context.drawImage(collision2, 0, 0, 75, 76, bBs[i].x - 20, bBs[i].y - 23, 75, 76);
+        //         bBs.splice(i, 1);
+        //         bBs.push(new BB());
+        //     }
+        //     bBs[i].draw();
+        //     bBs[i].update();
+        // }
+
+        // drawAndOrUpdateObjects(bBs, 75, 76, 20, 23, 75, 76, BB);
+
+        // for (let i = 0; i < cCs.length; i++) {
+        //     if (collisionBetweenMarioAndObject(mario, cCs[i])) {
+        //         context.drawImage(collision1, 0, 0, 55, 55, cCs[i].x - 12, cCs[i].y - 14, 55, 55);
+        //         cCs.splice(i, 1);
+        //         cCs.push(new CC());
+        //     }
+        //     cCs[i].draw();
+        //     cCs[i].update();
+        // }
+
+        // drawAndOrUpdateObjects(cCs, 55, 55, 12, 14, 55, 55, CC);
+
+        // for (let i = 0; i < dCs.length; i++) {
+        //     if (collisionBetweenMarioAndObject(mario, dCs[i])) {
+        //         context.drawImage(collision1, 0, 0, 55, 55, dCs[i].x - 11, dCs[i].y - 16, 55, 55);
+        //         dCs.splice(i, 1);
+        //         dCs.push(new DC());
+        //     }
+        //     dCs[i].draw();
+        //     dCs[i].update();
+        // }
+
+        // drawAndOrUpdateObjects(dCs, 55, 55, 11, 16, 55, 55, DC);
+
+        // for (let i = 0; i < eCs.length; i++) {
+        //     if (collisionBetweenMarioAndObject(mario, eCs[i])) {
+        //         context.drawImage(collision1, 0, 0, 55, 55, eCs[i].x - 11, eCs[i].y - 17, 55, 55);
+        //         eCs.splice(i, 1);
+        //         eCs.push(new EC());
+        //     }
+        //     eCs[i].draw();
+        //     eCs[i].update();
+        // }
+
+        // drawAndOrUpdateObjects(eCs, 55, 55, 11, 17, 55, 55, EC);
+
+        // for (let i = 0; i < gSCCs.length; i++) {
+        //     if (collisionBetweenMarioAndObject(mario, gSCCs[i])) {
+        //         context.drawImage(collision1, 0, 0, 55, 55, gSCCs[i].x - 13, gSCCs[i].y - 14, 55, 55);
+        //         gSCCs.splice(i, 1);
+        //         gSCCs.push(new GSCC());
+        //     }
+        //     gSCCs[i].draw();
+        //     gSCCs[i].update();
+        // }
+
+        // drawAndOrUpdateObjects(gSCCs, 55, 55, 13, 14, 55, 55, GSCC);
     }
 }
 
