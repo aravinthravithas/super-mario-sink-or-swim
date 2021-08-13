@@ -527,7 +527,7 @@ function animate() {
     if (elapsed > fpsInterval) {
         then = now - (elapsed % fpsInterval);
         context.clearRect(0, 0, canvas.width, canvas.height);
-        // context.drawImage(background, 0, 0, canvas.width, canvas.height);
+        context.drawImage(background, 0, 0, canvas.width, canvas.height);
         drawMario(marioSprite, mario.width * mario.frameX, mario.height * mario.frameY, mario.width, mario.height, mario.x, mario.y, mario.width, mario.height);
         moveMario();
         handleMarioFrame();
