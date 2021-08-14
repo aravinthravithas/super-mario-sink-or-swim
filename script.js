@@ -15,7 +15,7 @@ let mario = {
     x: 0.5 * canvas.width,
     y: 0.5 * canvas.height,
     width: 25,
-    height: 29,
+    height: 30,
     frameX: 3,
     frameY: 3,
     speed: 5,
