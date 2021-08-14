@@ -511,6 +511,18 @@ function drawAndOrUpdateObjects(objectArray, sourceWidth, sourceHeight, xAxisOff
 // objectArray[i].draw();
 // objectArray[i].update();
 
+let logo = new Image();
+logo.src = "images/logo.png";
+
+let play = new Image();
+play.src = "images/play.png";
+
+let controls = new Image();
+controls.src = "images/controls.png";
+
+let credits = new Image();
+credits.src = "images/credits.png";
+
 let fps, fpsInterval, startTime, now, then, elapsed;
 
 function startAnimating(fps) {
@@ -528,12 +540,16 @@ function animate() {
         then = now - (elapsed % fpsInterval);
         context.clearRect(0, 0, canvas.width, canvas.height);
         context.drawImage(background, 0, 0, canvas.width, canvas.height);
-        drawMario(marioSprite, mario.width * mario.frameX, mario.height * mario.frameY, mario.width, mario.height, mario.x, mario.y, mario.width, mario.height);
-        moveMario();
-        handleMarioFrame();
-        objectData.forEach(function(object) {
-            drawAndOrUpdateObjects(object.objectArray, object.sourceWidth, object.sourceHeight, object.xAxisOffset, object.yAxisOffset, object.destinationWidth, object.destinationHeight, object.objectClass)
-        });
+        context.drawImage(logo, 0, 0, 502, 297, (0.5 * canvas.width) - 255, (0.5 * canvas.height) - 255, 502, 297);
+        context.drawImage(play, 0, 0, 137, 36, (0.5 * canvas.width) - 75, (0.5 * canvas.height) + 85, 137, 36);
+        context.drawImage(controls, 0, 0, 273, 36, (0.5 * canvas.width) - 75, (0.5 * canvas.height) + 140, 273, 36);
+        context.drawImage(credits, 0, 0, 221, 36, (0.5 * canvas.width) - 75, (0.5 * canvas.height) + 195, 221, 36);
+        // drawMario(marioSprite, mario.width * mario.frameX, mario.height * mario.frameY, mario.width, mario.height, mario.x, mario.y, mario.width, mario.height);
+        // moveMario();
+        // handleMarioFrame();
+        // objectData.forEach(function(object) {
+        //     drawAndOrUpdateObjects(object.objectArray, object.sourceWidth, object.sourceHeight, object.xAxisOffset, object.yAxisOffset, object.destinationWidth, object.destinationHeight, object.objectClass)
+        // });
 
         // for (let i = 0; i < gCs.length; i++) {
         //     if (collisionBetweenMarioAndObject(mario, gCs[i])) {
