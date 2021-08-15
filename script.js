@@ -595,8 +595,9 @@ function animate() {
         context.drawImage(controls, 0, 0, 273, 36, (0.5 * canvas.width) - 140, (0.5 * canvas.height) + 135, 273, 36);
         context.drawImage(credits, 0, 0, 221, 36, (0.5 * canvas.width) - 115, (0.5 * canvas.height) + 190, 221, 36);
         if (menuMarioVisible === true){
+
             context.drawImage(menuMario, menuMarioX[0] - menuMarioSize, menuMarioY[0], menuMarioSize, menuMarioHeight);
-            context.drawImage(menuMario, menuMarioX[1] + (menuMarioSize / 12), menuMarioY[1], menuMarioSize, menuMarioHeight);
+            context.drawImage(menuMario, menuMarioX[1] + (menuMarioSize / 11), menuMarioY[1], menuMarioSize, menuMarioHeight);
         }
         // context.drawImage(marioRight, 0, 0, 22, 26, (0.5 * canvas.width) - 125, (0.5 * canvas.height) + 190, 22, 26);
         // context.drawImage(marioLeft, 0, 0, 22, 26, (0.5 * canvas.width) - 60, (0.5 * canvas.height) + 190, 22, 26);
