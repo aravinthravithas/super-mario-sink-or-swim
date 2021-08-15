@@ -6,6 +6,36 @@ canvas.height = window.innerHeight;
 let context = canvas.getContext('2d');
 context.imageSmoothingEnabled = false;
 
+let mouseX;
+let mouseY;
+ 
+canvas.addEventListener("mousemove", checkPos);
+
+function checkPos(mouseEvent) {
+    if (mouseEvent.pageX || mouseEvent.pageY == 0) {
+        mouseX = mouseEvent.pageX - this.offsetLeft;
+        mouseY = mouseEvent.pageY - this.offsetTop;
+    }  
+    else if(mouseEvent.offsetX || mouseEvent.offsetY == 0) {
+        mouseX = mouseEvent.offsetX;
+        mouseY = mouseEvent.offsetY;
+    }
+    for(i = 0; i < menuButtonX.length; i++) {
+        if (mouseX > menuButtonX[i] && mouseX < menuButtonX[i] + menuButtonWidth[i]) {
+            if (mouseY > menuButtonY[i] && mouseY < menuButtonY[i] + menuButtonHeight[i]) {
+                menuMarioVisible = true;
+                menuMarioX[0] = menuButtonX[i] - (menuMarioWidth/2) - 2;
+                menuMarioY[0] = menuButtonY[i] + 2;
+                menuMarioX[1] = menuButtonX[i] + menuButtonWidth[i] + (menuMarioWidth/2); 
+                menuMarioY[1] = menuButtonY[i] + 2;
+            }
+        }
+        else{
+            menuMarioVisible = false;
+        }
+    }
+};
+
 let keys = [];
 
 let background = new Image();
@@ -523,6 +553,26 @@ controls.src = "images/controls.png";
 let credits = new Image();
 credits.src = "images/credits.png";
 
+let menuMario = new Image();
+menuMario.src = "images/menuMario.png"
+
+var menuMarioX = [0, 0];
+var menuMarioY = [0, 0];
+var menuMarioWidth = 18;
+var menuMarioHeight = 33;
+ 
+var menuMarioVisible = false;
+var menuMarioSize = menuMarioWidth;
+var menuMarioRotate = 0;
+
+let marioLeft = new Image();
+marioLeft.src = "images/marioLeft.png"
+
+let menuButtonX = [(0.5 * canvas.width) - 75, (0.5 * canvas.width) - 140, (0.5 * canvas.width) - 115];
+let menuButtonY = [(0.5 * canvas.height) + 80, (0.5 * canvas.height) + 135, (0.5 * canvas.height) + 190];
+let menuButtonWidth = [137, 273, 221];
+let menuButtonHeight = [36, 36, 36];
+
 let fps, fpsInterval, startTime, now, then, elapsed;
 
 function startAnimating(fps) {
@@ -540,10 +590,17 @@ function animate() {
         then = now - (elapsed % fpsInterval);
         context.clearRect(0, 0, canvas.width, canvas.height);
         context.drawImage(background, 0, 0, canvas.width, canvas.height);
-        context.drawImage(logo, 0, 0, 502, 297, (0.5 * canvas.width) - 255, (0.5 * canvas.height) - 255, 502, 297);
-        context.drawImage(play, 0, 0, 137, 36, (0.5 * canvas.width) - 75, (0.5 * canvas.height) + 85, 137, 36);
-        context.drawImage(controls, 0, 0, 273, 36, (0.5 * canvas.width) - 75, (0.5 * canvas.height) + 140, 273, 36);
-        context.drawImage(credits, 0, 0, 221, 36, (0.5 * canvas.width) - 75, (0.5 * canvas.height) + 195, 221, 36);
+        context.drawImage(logo, 0, 0, 502, 297, (0.5 * canvas.width) - 255, (0.5 * canvas.height) - 260, 502, 297);
+        context.drawImage(play, 0, 0, 137, 36, (0.5 * canvas.width) - 75, (0.5 * canvas.height) + 80, 137, 36);
+        context.drawImage(controls, 0, 0, 273, 36, (0.5 * canvas.width) - 140, (0.5 * canvas.height) + 135, 273, 36);
+        context.drawImage(credits, 0, 0, 221, 36, (0.5 * canvas.width) - 115, (0.5 * canvas.height) + 190, 221, 36);
+        if (menuMarioVisible === true){
+            context.drawImage(menuMario, menuMarioX[0] - menuMarioSize, menuMarioY[0], menuMarioSize, menuMarioHeight);
+            context.drawImage(menuMario, menuMarioX[1] + (menuMarioSize / 12), menuMarioY[1], menuMarioSize, menuMarioHeight);
+        }
+        // context.drawImage(marioRight, 0, 0, 22, 26, (0.5 * canvas.width) - 125, (0.5 * canvas.height) + 190, 22, 26);
+        // context.drawImage(marioLeft, 0, 0, 22, 26, (0.5 * canvas.width) - 60, (0.5 * canvas.height) + 190, 22, 26);
+
         // drawMario(marioSprite, mario.width * mario.frameX, mario.height * mario.frameY, mario.width, mario.height, mario.x, mario.y, mario.width, mario.height);
         // moveMario();
         // handleMarioFrame();
