@@ -11,8 +11,10 @@ let mouseY;
 
 let gameState;
 
+let startScreenClick = new Audio("audio/startScreenClick.mp3");
 let menuHover = new Audio("audio/menuHover.mp3");
 let menuSelection = new Audio("audio/menuSelection.mp3");
+let menuMusic = new Audio("audio/menuMusic.mp3");
  
 canvas.addEventListener("mousemove", checkPos);
 
@@ -25,19 +27,21 @@ function checkPos(mouseEvent) {
         mouseX = mouseEvent.offsetX;
         mouseY = mouseEvent.offsetY;
     }
-    for(i = 0; i < menuButtonX.length; i++) {
-        if (mouseX > menuButtonX[i] && mouseX < menuButtonX[i] + menuButtonWidth[i]) {
-            if (mouseY > menuButtonY[i] && mouseY < menuButtonY[i] + menuButtonHeight[i]) {
-                menuHover.play();
-                menuMarioVisible = true;
-                menuMarioX[0] = menuButtonX[i] - (menuMarioWidth/2) - 2;
-                menuMarioY[0] = menuButtonY[i] + 2;
-                menuMarioX[1] = menuButtonX[i] + menuButtonWidth[i] + (menuMarioWidth/2); 
-                menuMarioY[1] = menuButtonY[i] + 2;
+    if (gameState === "mainMenu") {
+        for(i = 0; i < menuButtonX.length; i++) {
+            if (mouseX > menuButtonX[i] && mouseX < menuButtonX[i] + menuButtonWidth[i]) {
+                if (mouseY > menuButtonY[i] && mouseY < menuButtonY[i] + menuButtonHeight[i]) {
+                    menuHover.play();
+                    menuMarioVisible = true;
+                    menuMarioX[0] = menuButtonX[i] - (menuMarioWidth/2) - 2;
+                    menuMarioY[0] = menuButtonY[i] + 2;
+                    menuMarioX[1] = menuButtonX[i] + menuButtonWidth[i] + (menuMarioWidth/2); 
+                    menuMarioY[1] = menuButtonY[i] + 2;
+                }
             }
-        }
-        else {
-            menuMarioVisible = false;
+            else {
+                menuMarioVisible = false;
+            }
         }
     }
 };
@@ -47,9 +51,13 @@ canvas.addEventListener("mouseup", checkStartClick);
 function checkStartClick() {
     if (mouseX > 0 && mouseX < canvas.width) {
         if (mouseY > 0 && mouseY < canvas.height) {
-            canvas.removeEventListener("mousemove", checkPos);
-            canvas.removeEventListener("mouseup", checkMenuClick);
-            gameState = "mainMenu"
+            startScreenClick.play();
+            canvas.removeEventListener("mouseup", checkStartClick);
+            setTimeout(
+                function() { 
+                    gameState = "mainMenu"; 
+                }, 900
+            );
         }
     }
 }
@@ -634,11 +642,12 @@ let selectAGameMode = new Image();
 selectAGameMode.src = "images/selectAGameMode.png"
 
 function startScreen() {
-    context.drawImage(startLogo, 0, 0, 625, 369, (0.5 * canvas.width) - 315, (0.5 * canvas.height) - 260, 625, 369);
+    context.drawImage(startLogo, 0, 0, 600, 356, (0.5 * canvas.width) - 310, (0.5 * canvas.height) - 260, 600, 356);
     context.drawImage(clickAnywhere, 0, 0, 820, 29, (0.5 * canvas.width) - 400, (0.5 * canvas.height) + 170, 820, 29);
 }
 
 function mainMenu() {
+    menuMusic.play();
     canvas.addEventListener("mouseup", checkMenuClick);
     context.drawImage(menuLogo, 0, 0, 502, 297, (0.5 * canvas.width) - 255, (0.5 * canvas.height) - 260, 502, 297);
     context.drawImage(play, 0, 0, 137, 36, (0.5 * canvas.width) - 75, (0.5 * canvas.height) + 80, 137, 36);
