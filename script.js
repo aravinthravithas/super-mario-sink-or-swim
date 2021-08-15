@@ -644,6 +644,9 @@ startLogo.src = "images/startLogo.png";
 let clickAnywhere = new Image();
 clickAnywhere.src = "images/clickAnywhere.png";
 
+let menuMario = new Image();
+menuMario.src = "images/menuMario.png"
+
 let menuLogo = new Image();
 menuLogo.src = "images/menuLogo.png";
 
@@ -656,8 +659,14 @@ controls.src = "images/controls.png";
 let credits = new Image();
 credits.src = "images/credits.png";
 
-let menuMario = new Image();
-menuMario.src = "images/menuMario.png"
+let classic = new Image();
+classic.src = "images/classic.png";
+
+let survival = new Image();
+survival.src = "images/survival.png";
+
+let domination = new Image();
+domination.src = "images/domination.png";
 
 let menuMarioX = [0, 0];
 let menuMarioY = [0, 0];
@@ -687,7 +696,7 @@ blockStar.src = "images/blockStar.png"
 
 function startScreen() {
     context.drawImage(startLogo, 0, 0, 600, 356, (0.5 * canvas.width) - 310, (0.5 * canvas.height) - 260, 600, 356);
-    context.drawImage(clickAnywhere, 0, 0, 820, 29, (0.5 * canvas.width) - 400, (0.5 * canvas.height) + 170, 820, 29);
+    context.drawImage(clickAnywhere, 0, 0, 820, 29, (0.5 * canvas.width) - 400, (0.5 * canvas.height) + 155, 820, 29);
 }
 
 function mainMenu() {
@@ -709,6 +718,9 @@ function selectGameMode() {
     context.drawImage(blockCoin, 0, 0, 256, 256, (0.5 * canvas.width) - 530, (0.5 * canvas.height) - 150, 256, 256);
     context.drawImage(blockFrog, 0, 0, 256, 256, (0.5 * canvas.width) - 130, (0.5 * canvas.height) - 150, 256, 256);
     context.drawImage(blockStar, 0, 0, 256, 256, (0.5 * canvas.width) + 270, (0.5 * canvas.height) - 150, 256, 256);
+    context.drawImage(classic, 0, 0, 221, 36, (0.5 * canvas.width) - 513, (0.5 * canvas.height) + 150, 221, 36);
+    context.drawImage(survival, 0, 0, 255, 36, (0.5 * canvas.width) - 130, (0.5 * canvas.height) + 150, 255, 36);
+    context.drawImage(domination, 0, 0, 305, 36, (0.5 * canvas.width) + 246, (0.5 * canvas.height) + 150, 305, 36);
 };
 
 function startGame() {
