@@ -44,7 +44,7 @@ function checkMenuClick() {
     for (i = 0; i < menuButtonX.length; i++) {
         if (mouseX > menuButtonX[i] && mouseX < menuButtonX[i] + menuButtonWidth[i]) {
             if (mouseY > menuButtonY[i] && mouseY < menuButtonY[i] + menuButtonHeight[i]) {
-                // canvas.removeEventListener("mousemove", checkPos);
+                canvas.removeEventListener("mousemove", checkPos);
                 canvas.removeEventListener("mouseup", checkMenuClick);
                 if (i === 0) {
                     play.src = "images/playActive.png";
