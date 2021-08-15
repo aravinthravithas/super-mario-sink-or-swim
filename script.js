@@ -8,6 +8,8 @@ context.imageSmoothingEnabled = false;
 
 let mouseX;
 let mouseY;
+
+let gameState;
  
 canvas.addEventListener("mousemove", checkPos);
 
@@ -30,8 +32,30 @@ function checkPos(mouseEvent) {
                 menuMarioY[1] = menuButtonY[i] + 2;
             }
         }
-        else{
+        else {
             menuMarioVisible = false;
+        }
+    }
+};
+
+// canvas.addEventListener("mouseup", checkMenuClick);
+
+function checkMenuClick() {
+    for (i = 0; i < menuButtonX.length; i++) {
+        if (mouseX > menuButtonX[i] && mouseX < menuButtonX[i] + menuButtonWidth[i]) {
+            if (mouseY > menuButtonY[i] && mouseY < menuButtonY[i] + menuButtonHeight[i]) {
+                // canvas.removeEventListener("mousemove", checkPos);
+                canvas.removeEventListener("mouseup", checkMenuClick);
+                if (i === 0) {
+                    play.src = "images/playActive.png";
+                    setTimeout(
+                        function() { 
+                            gameState = "selectGameMode"; 
+                        }, 300
+                    );
+                    // gameState = "selectGameMode";
+                }
+            }
         }
     }
 };
@@ -556,22 +580,48 @@ credits.src = "images/credits.png";
 let menuMario = new Image();
 menuMario.src = "images/menuMario.png"
 
-var menuMarioX = [0, 0];
-var menuMarioY = [0, 0];
-var menuMarioWidth = 18;
-var menuMarioHeight = 33;
+let menuMarioX = [0, 0];
+let menuMarioY = [0, 0];
+let menuMarioWidth = 18;
+let menuMarioHeight = 33;
  
-var menuMarioVisible = false;
-var menuMarioSize = menuMarioWidth;
-var menuMarioRotate = 0;
-
-let marioLeft = new Image();
-marioLeft.src = "images/marioLeft.png"
+let menuMarioVisible = false;
+let menuMarioSize = menuMarioWidth;
+// let menuMarioRotate = 0;
 
 let menuButtonX = [(0.5 * canvas.width) - 75, (0.5 * canvas.width) - 140, (0.5 * canvas.width) - 115];
 let menuButtonY = [(0.5 * canvas.height) + 80, (0.5 * canvas.height) + 135, (0.5 * canvas.height) + 190];
 let menuButtonWidth = [137, 273, 221];
 let menuButtonHeight = [36, 36, 36];
+
+let selectAGameMode = new Image();
+selectAGameMode.src = "images/selectAGameMode.png"
+
+function mainMenu() {
+    canvas.addEventListener("mouseup", checkMenuClick);
+    context.drawImage(logo, 0, 0, 502, 297, (0.5 * canvas.width) - 255, (0.5 * canvas.height) - 260, 502, 297);
+    context.drawImage(play, 0, 0, 137, 36, (0.5 * canvas.width) - 75, (0.5 * canvas.height) + 80, 137, 36);
+    context.drawImage(controls, 0, 0, 273, 36, (0.5 * canvas.width) - 140, (0.5 * canvas.height) + 135, 273, 36);
+    context.drawImage(credits, 0, 0, 221, 36, (0.5 * canvas.width) - 115, (0.5 * canvas.height) + 190, 221, 36);
+    if (menuMarioVisible === true) {
+
+        context.drawImage(menuMario, menuMarioX[0] - menuMarioSize, menuMarioY[0], menuMarioSize, menuMarioHeight);
+        context.drawImage(menuMario, menuMarioX[1] + (menuMarioSize / 11), menuMarioY[1], menuMarioSize, menuMarioHeight);
+    }
+};
+
+function selectGameMode() {
+    context.drawImage(selectAGameMode, 0, 0, 725, 52, (0.5 * canvas.width) - 365, (0.5 * canvas.height) - 260, 725, 52);
+};
+
+function startGame() {
+    drawMario(marioSprite, mario.width * mario.frameX, mario.height * mario.frameY, mario.width, mario.height, mario.x, mario.y, mario.width, mario.height);
+    moveMario();
+    handleMarioFrame();
+    objectData.forEach(function(object) {
+        drawAndOrUpdateObjects(object.objectArray, object.sourceWidth, object.sourceHeight, object.xAxisOffset, object.yAxisOffset, object.destinationWidth, object.destinationHeight, object.objectClass)
+    });
+};
 
 let fps, fpsInterval, startTime, now, then, elapsed;
 
@@ -590,17 +640,26 @@ function animate() {
         then = now - (elapsed % fpsInterval);
         context.clearRect(0, 0, canvas.width, canvas.height);
         context.drawImage(background, 0, 0, canvas.width, canvas.height);
-        context.drawImage(logo, 0, 0, 502, 297, (0.5 * canvas.width) - 255, (0.5 * canvas.height) - 260, 502, 297);
-        context.drawImage(play, 0, 0, 137, 36, (0.5 * canvas.width) - 75, (0.5 * canvas.height) + 80, 137, 36);
-        context.drawImage(controls, 0, 0, 273, 36, (0.5 * canvas.width) - 140, (0.5 * canvas.height) + 135, 273, 36);
-        context.drawImage(credits, 0, 0, 221, 36, (0.5 * canvas.width) - 115, (0.5 * canvas.height) + 190, 221, 36);
-        if (menuMarioVisible === true){
+        // context.drawImage(logo, 0, 0, 502, 297, (0.5 * canvas.width) - 255, (0.5 * canvas.height) - 260, 502, 297);
+        // context.drawImage(play, 0, 0, 137, 36, (0.5 * canvas.width) - 75, (0.5 * canvas.height) + 80, 137, 36);
+        // context.drawImage(controls, 0, 0, 273, 36, (0.5 * canvas.width) - 140, (0.5 * canvas.height) + 135, 273, 36);
+        // context.drawImage(credits, 0, 0, 221, 36, (0.5 * canvas.width) - 115, (0.5 * canvas.height) + 190, 221, 36);
+        // if (menuMarioVisible === true) {
+        //     context.drawImage(menuMario, menuMarioX[0] - menuMarioSize, menuMarioY[0], menuMarioSize, menuMarioHeight);
+        //     context.drawImage(menuMario, menuMarioX[1] + (menuMarioSize / 11), menuMarioY[1], menuMarioSize, menuMarioHeight);
+        // }
 
-            context.drawImage(menuMario, menuMarioX[0] - menuMarioSize, menuMarioY[0], menuMarioSize, menuMarioHeight);
-            context.drawImage(menuMario, menuMarioX[1] + (menuMarioSize / 11), menuMarioY[1], menuMarioSize, menuMarioHeight);
+        if (gameState === undefined) {
+            mainMenu()
         }
-        // context.drawImage(marioRight, 0, 0, 22, 26, (0.5 * canvas.width) - 125, (0.5 * canvas.height) + 190, 22, 26);
-        // context.drawImage(marioLeft, 0, 0, 22, 26, (0.5 * canvas.width) - 60, (0.5 * canvas.height) + 190, 22, 26);
+
+        if (gameState === "selectGameMode") {
+            selectGameMode()
+        }
+
+        // if (gameState === "Classic") {
+        //     startGame();
+        // }
 
         // drawMario(marioSprite, mario.width * mario.frameX, mario.height * mario.frameY, mario.width, mario.height, mario.x, mario.y, mario.width, mario.height);
         // moveMario();
