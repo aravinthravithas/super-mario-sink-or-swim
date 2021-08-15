@@ -28,7 +28,7 @@ function checkPos(mouseEvent) {
         mouseY = mouseEvent.offsetY;
     }
     if (gameState === "mainMenu") {
-        for(i = 0; i < menuButtonX.length; i++) {
+        for (i = 0; i < menuButtonX.length; i++) {
             if (mouseX > menuButtonX[i] && mouseX < menuButtonX[i] + menuButtonWidth[i]) {
                 if (mouseY > menuButtonY[i] && mouseY < menuButtonY[i] + menuButtonHeight[i]) {
                     menuHover.play();
@@ -63,39 +63,74 @@ function checkStartClick() {
 }
 
 function checkMenuClick() {
-    for (i = 0; i < menuButtonX.length; i++) {
-        if (mouseX > menuButtonX[i] && mouseX < menuButtonX[i] + menuButtonWidth[i]) {
-            if (mouseY > menuButtonY[i] && mouseY < menuButtonY[i] + menuButtonHeight[i]) {
-                canvas.removeEventListener("mousemove", checkPos);
-                canvas.removeEventListener("mouseup", checkMenuClick);
-                if (i === 0) {
-                    play.src = "images/playActive.png";
-                    setTimeout(
-                        function() { 
-                            gameState = "selectGameMode"; 
-                        }, 300
-                    );
-                    // gameState = "selectGameMode";
-                }
-                if (i === 1) {
-                    controls.src = "images/controlsActive.png";
-                    setTimeout(
-                        function() { 
-                            gameState = "controls"; 
-                        }, 300
-                    );
-                }
-                if (i === 2) {
-                    credits.src = "images/creditsActive.png";
-                    setTimeout(
-                        function() { 
-                            gameState = "credits"; 
-                        }, 300
-                    );
+    if (gameState === "mainMenu") {
+        for (i = 0; i < menuButtonX.length; i++) {
+            if (mouseX > menuButtonX[i] && mouseX < menuButtonX[i] + menuButtonWidth[i]) {
+                if (mouseY > menuButtonY[i] && mouseY < menuButtonY[i] + menuButtonHeight[i]) {
+                    menuSelection.play();
+                    canvas.removeEventListener("mousemove", checkPos);
+                    canvas.removeEventListener("mouseup", checkMenuClick);
+                    if (i === 0) {
+                        play.src = "images/playActive.png";
+                        setTimeout(
+                            function() { 
+                                gameState = "selectGameMode"; 
+                            }, 300
+                        );
+                    }
+                    if (i === 1) {
+                        controls.src = "images/controlsActive.png";
+                        setTimeout(
+                            function() { 
+                                gameState = "controls"; 
+                            }, 300
+                        );
+                    }
+                    if (i === 2) {
+                        credits.src = "images/creditsActive.png";
+                        setTimeout(
+                            function() { 
+                                gameState = "credits"; 
+                            }, 300
+                        );
+                    }
                 }
             }
         }
     }
+    // for (i = 0; i < menuButtonX.length; i++) {
+    //     if (mouseX > menuButtonX[i] && mouseX < menuButtonX[i] + menuButtonWidth[i]) {
+    //         if (mouseY > menuButtonY[i] && mouseY < menuButtonY[i] + menuButtonHeight[i]) {
+    //             canvas.removeEventListener("mousemove", checkPos);
+    //             canvas.removeEventListener("mouseup", checkMenuClick);
+    //             menuSelection.play();
+    //             if (i === 0) {
+    //                 play.src = "images/playActive.png";
+    //                 setTimeout(
+    //                     function() { 
+    //                         gameState = "selectGameMode"; 
+    //                     }, 300
+    //                 );
+    //             }
+    //             if (i === 1) {
+    //                 controls.src = "images/controlsActive.png";
+    //                 setTimeout(
+    //                     function() { 
+    //                         gameState = "controls"; 
+    //                     }, 300
+    //                 );
+    //             }
+    //             if (i === 2) {
+    //                 credits.src = "images/creditsActive.png";
+    //                 setTimeout(
+    //                     function() { 
+    //                         gameState = "credits"; 
+    //                     }, 300
+    //                 );
+    //             }
+    //         }
+    //     }
+    // }
 };
 
 let keys = [];
@@ -641,6 +676,15 @@ let menuButtonHeight = [36, 36, 36];
 let selectAGameMode = new Image();
 selectAGameMode.src = "images/selectAGameMode.png"
 
+let blockCoin = new Image();
+blockCoin.src = "images/blockCoin.png"
+
+let blockFrog = new Image();
+blockFrog.src = "images/blockFrog.png"
+
+let blockStar = new Image();
+blockStar.src = "images/blockStar.png"
+
 function startScreen() {
     context.drawImage(startLogo, 0, 0, 600, 356, (0.5 * canvas.width) - 310, (0.5 * canvas.height) - 260, 600, 356);
     context.drawImage(clickAnywhere, 0, 0, 820, 29, (0.5 * canvas.width) - 400, (0.5 * canvas.height) + 170, 820, 29);
@@ -662,6 +706,9 @@ function mainMenu() {
 
 function selectGameMode() {
     context.drawImage(selectAGameMode, 0, 0, 725, 52, (0.5 * canvas.width) - 365, (0.5 * canvas.height) - 260, 725, 52);
+    context.drawImage(blockCoin, 0, 0, 256, 256, (0.5 * canvas.width) - 530, (0.5 * canvas.height) - 150, 256, 256);
+    context.drawImage(blockFrog, 0, 0, 256, 256, (0.5 * canvas.width) - 130, (0.5 * canvas.height) - 150, 256, 256);
+    context.drawImage(blockStar, 0, 0, 256, 256, (0.5 * canvas.width) + 270, (0.5 * canvas.height) - 150, 256, 256);
 };
 
 function startGame() {
