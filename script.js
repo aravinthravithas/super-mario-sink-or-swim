@@ -12,9 +12,11 @@ let mouseY;
 let gameState;
 
 let startScreenClick = new Audio("audio/startScreenClick.mp3");
+let menuMusic = new Audio("audio/menuMusic.mp3");
 let menuHover = new Audio("audio/menuHover.mp3");
 let menuSelection = new Audio("audio/menuSelection.mp3");
-let menuMusic = new Audio("audio/menuMusic.mp3");
+let courseHover = new Audio("audio/courseHover.mp3");
+let courseSelection = new Audio("audio/courseSelection.mp3");
  
 canvas.addEventListener("mousemove", checkPos);
 
@@ -48,7 +50,7 @@ function checkPos(mouseEvent) {
         for (i = 0; i < gameMenuButtonX.length; i++) {
             if (mouseX > gameMenuButtonX[i] && mouseX < gameMenuButtonX[i] + gameMenuButtonWidth[i]) {
                 if (mouseY > gameMenuButtonY[i] && mouseY < gameMenuButtonY[i] + gameMenuButtonHeight[i]) {
-                    // menuHover.play();
+                    courseHover.play();
                     menuMarioVisible = true;
                     menuMarioX[0] = gameMenuButtonX[i] - (menuMarioWidth/2) - 2;
                     menuMarioY[0] = gameMenuButtonY[i] + 2;
@@ -123,7 +125,7 @@ function checkGameMenuClick() {
         for (i = 0; i < gameMenuButtonX.length; i++) {
             if (mouseX > gameMenuButtonX[i] && mouseX < gameMenuButtonX[i] + gameMenuButtonWidth[i]) {
                 if (mouseY > gameMenuButtonY[i] && mouseY < gameMenuButtonY[i] + gameMenuButtonHeight[i]) {
-                    // menuSelection.play(); <--- PLAY THE RIGHT SOUND HERE
+                    courseSelection.play();
                     canvas.removeEventListener("mousemove", checkPos);
                     canvas.removeEventListener("mouseup", checkGameMenuClick);
                     if (i === 0) {
