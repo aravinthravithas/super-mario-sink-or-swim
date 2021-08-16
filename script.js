@@ -87,7 +87,7 @@ function checkStartScreenClick() {
             setTimeout(
                 function() { 
                     gameState = "mainMenu"; 
-                }, 900
+                }, 1225
             );
         }
     }
@@ -107,7 +107,7 @@ function checkMainMenuClick() {
                         setTimeout(
                             function() { 
                                 gameState = "selectGameMode"; 
-                            }, 600
+                            }, 700
                         );
                     }
                     if (i === 1) {
@@ -115,7 +115,7 @@ function checkMainMenuClick() {
                         setTimeout(
                             function() { 
                                 gameState = "controls"; 
-                            }, 600
+                            }, 700
                         );
                     }
                     if (i === 2) {
@@ -123,7 +123,7 @@ function checkMainMenuClick() {
                         setTimeout(
                             function() { 
                                 gameState = "credits"; 
-                            }, 600
+                            }, 700
                         );
                     }
                 }
@@ -137,6 +137,40 @@ function checkGameMenuClick() {
         for (i = 0; i < gameMenuButtonX.length; i++) {
             if (mouseX > gameMenuButtonX[i] && mouseX < gameMenuButtonX[i] + gameMenuButtonWidth[i]) {
                 if (mouseY > gameMenuButtonY[i] && mouseY < gameMenuButtonY[i] + gameMenuButtonHeight[i]) {
+                    menuMusic.pause();
+                    courseSelection.play();
+                    canvas.removeEventListener("mousemove", checkPos);
+                    canvas.removeEventListener("mouseup", checkGameMenuClick);
+                    if (i === 0) {
+                        classic.src = "images/classicActive.png";
+                        setTimeout(
+                            function() { 
+                                gameState = "classicGameMode"; 
+                            }, 1300
+                        );
+                    }
+                    if (i === 1) {
+                        survival.src = "images/survivalActive.png";
+                        setTimeout(
+                            function() { 
+                                gameState = "survivalGameMode"; 
+                            }, 1300
+                        );
+                    }
+                    if (i === 2) {
+                        domination.src = "images/dominationActive.png";
+                        setTimeout(
+                            function() { 
+                                gameState = "dominationGameMode"; 
+                            }, 1300
+                        );
+                    }
+                }
+            }
+        }
+        for (i = 0; i < gameMenuBlockX.length; i++) {
+            if (mouseX > gameMenuBlockX[i] && mouseX < gameMenuBlockX[i] + gameMenuBlockWidth[i]) {
+                if (mouseY > gameMenuBlockY[i] && mouseY < gameMenuBlockY[i] + gameMenuBlockHeight[i]) {
                     menuMusic.pause();
                     courseSelection.play();
                     canvas.removeEventListener("mousemove", checkPos);
