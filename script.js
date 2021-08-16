@@ -10,6 +10,7 @@ let mouseX;
 let mouseY;
 
 let gameState;
+let gameModeSelected = false;
 
 let startScreenClick = new Audio("audio/startScreenClick.mp3");
 let menuMusic = new Audio("audio/menuMusic.mp3");
@@ -100,8 +101,7 @@ function checkMainMenuClick() {
                 if (mouseY > mainMenuButtonY[i] && mouseY < mainMenuButtonY[i] + mainMenuButtonHeight[i]) {
                     menuSelection.play();
                     canvas.removeEventListener("mousemove", checkPos);
-                    canvas.removeEventListener("mouseup", checkMainMenuClick);
-                    menuMarioVisible = false;
+                    canvas.removeEventListener("mouseup", checkMainMenuClick);                    menuMarioVisible = false;
                     if (i === 0) {
                         play.src = "images/playActive.png";
                         setTimeout(
@@ -141,6 +141,7 @@ function checkGameMenuClick() {
                     courseSelection.play();
                     canvas.removeEventListener("mousemove", checkPos);
                     canvas.removeEventListener("mouseup", checkGameMenuClick);
+                    gameModeSelected = true;
                     if (i === 0) {
                         classic.src = "images/classicActive.png";
                         setTimeout(
@@ -175,6 +176,7 @@ function checkGameMenuClick() {
                     courseSelection.play();
                     canvas.removeEventListener("mousemove", checkPos);
                     canvas.removeEventListener("mouseup", checkGameMenuClick);
+                    gameModeSelected = true;
                     if (i === 0) {
                         classic.src = "images/classicActive.png";
                         setTimeout(
@@ -795,7 +797,10 @@ function mainMenu() {
 };
 
 function selectGameMode() {
-    canvas.addEventListener("mousemove", checkPos);
+    if (gameModeSelected === false) {
+        canvas.addEventListener("mousemove", checkPos)
+    }
+    // canvas.addEventListener("mousemove", checkPos);
     canvas.addEventListener("mouseup", checkGameMenuClick);
     context.drawImage(selectAGameMode, 0, 0, 725, 52, (0.5 * canvas.width) - 365, (0.5 * canvas.height) - 260, 725, 52);
     context.drawImage(blockCoin, 0, 0, 256, 256, (0.5 * canvas.width) - 530, (0.5 * canvas.height) - 150, 256, 256);
