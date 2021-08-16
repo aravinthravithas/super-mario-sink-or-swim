@@ -18,7 +18,7 @@ let menuSelection = new Audio("audio/menuSelection.mp3");
 let courseHover = new Audio("audio/courseHover.mp3");
 let courseSelection = new Audio("audio/courseSelection.mp3");
  
-canvas.addEventListener("mousemove", checkPos);
+// canvas.addEventListener("mousemove", checkPos);
 
 function checkPos(mouseEvent) {
     if (mouseEvent.pageX || mouseEvent.pageY == 0) {
@@ -776,6 +776,7 @@ let blockStar = new Image();
 blockStar.src = "images/blockStar.png"
 
 function startScreen() {
+    canvas.addEventListener("mousemove", checkPos);
     context.drawImage(startLogo, 0, 0, 600, 356, (0.5 * canvas.width) - 310, (0.5 * canvas.height) - 260, 600, 356);
     context.drawImage(clickAnywhere, 0, 0, 820, 29, (0.5 * canvas.width) - 400, (0.5 * canvas.height) + 155, 820, 29);
 }
