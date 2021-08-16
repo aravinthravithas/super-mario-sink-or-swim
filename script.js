@@ -62,6 +62,18 @@ function checkPos(mouseEvent) {
             //     menuMarioVisible = false;
             // }
         }
+        for (i = 0; i < gameMenuBlockX.length; i++) {
+            if (mouseX > gameMenuBlockX[i] && mouseX < gameMenuBlockX[i] + gameMenuBlockWidth[i]) {
+                if (mouseY > gameMenuBlockY[i] && mouseY < gameMenuBlockY[i] + gameMenuBlockHeight[i]) {
+                    courseHover.play();
+                    menuMarioVisible = true;
+                    menuMarioX[0] = gameMenuButtonX[i] - (menuMarioWidth/2) - 2;
+                    menuMarioY[0] = gameMenuButtonY[i] + 2;
+                    menuMarioX[1] = gameMenuButtonX[i] + gameMenuButtonWidth[i] + (menuMarioWidth/2); 
+                    menuMarioY[1] = gameMenuButtonY[i] + 2;
+                }
+            }
+        }
     }
 };
 
@@ -95,7 +107,7 @@ function checkMainMenuClick() {
                         setTimeout(
                             function() { 
                                 gameState = "selectGameMode"; 
-                            }, 300
+                            }, 600
                         );
                     }
                     if (i === 1) {
@@ -103,7 +115,7 @@ function checkMainMenuClick() {
                         setTimeout(
                             function() { 
                                 gameState = "controls"; 
-                            }, 300
+                            }, 600
                         );
                     }
                     if (i === 2) {
@@ -111,7 +123,7 @@ function checkMainMenuClick() {
                         setTimeout(
                             function() { 
                                 gameState = "credits"; 
-                            }, 300
+                            }, 600
                         );
                     }
                 }
@@ -125,32 +137,33 @@ function checkGameMenuClick() {
         for (i = 0; i < gameMenuButtonX.length; i++) {
             if (mouseX > gameMenuButtonX[i] && mouseX < gameMenuButtonX[i] + gameMenuButtonWidth[i]) {
                 if (mouseY > gameMenuButtonY[i] && mouseY < gameMenuButtonY[i] + gameMenuButtonHeight[i]) {
+                    menuMusic.pause();
                     courseSelection.play();
                     canvas.removeEventListener("mousemove", checkPos);
                     canvas.removeEventListener("mouseup", checkGameMenuClick);
                     if (i === 0) {
                         classic.src = "images/classicActive.png";
-                        // setTimeout(
-                        //     function() { 
-                        //         gameState = "selectGameMode"; 
-                        //     }, 300
-                        // );
+                        setTimeout(
+                            function() { 
+                                gameState = "classicGameMode"; 
+                            }, 1300
+                        );
                     }
                     if (i === 1) {
                         survival.src = "images/survivalActive.png";
-                        // setTimeout(
-                        //     function() { 
-                        //         gameState = "controls"; 
-                        //     }, 300
-                        // );
+                        setTimeout(
+                            function() { 
+                                gameState = "survivalGameMode"; 
+                            }, 1300
+                        );
                     }
                     if (i === 2) {
                         domination.src = "images/dominationActive.png";
-                        // setTimeout(
-                        //     function() { 
-                        //         gameState = "credits"; 
-                        //     }, 300
-                        // );
+                        setTimeout(
+                            function() { 
+                                gameState = "dominationGameMode"; 
+                            }, 1300
+                        );
                     }
                 }
             }
@@ -700,7 +713,6 @@ let menuMarioHeight = 33;
  
 let menuMarioVisible = false;
 let menuMarioSize = menuMarioWidth;
-// let menuMarioRotate = 0;
 
 let mainMenuButtonX = [(0.5 * canvas.width) - 75, (0.5 * canvas.width) - 140, (0.5 * canvas.width) - 115];
 let mainMenuButtonY = [(0.5 * canvas.height) + 80, (0.5 * canvas.height) + 135, (0.5 * canvas.height) + 190];
@@ -711,6 +723,11 @@ let gameMenuButtonX = [(0.5 * canvas.width) - 513, (0.5 * canvas.width) - 130, (
 let gameMenuButtonY = [(0.5 * canvas.height) + 150, (0.5 * canvas.height) + 150, (0.5 * canvas.height) + 150];
 let gameMenuButtonWidth = [221, 255, 305];
 let gameMenuButtonHeight = [36, 36, 36];
+
+let gameMenuBlockX = [(0.5 * canvas.width) - 530, (0.5 * canvas.width) - 130, (0.5 * canvas.width) + 270];
+let gameMenuBlockY = [(0.5 * canvas.height) - 150, (0.5 * canvas.height) - 150, (0.5 * canvas.height) - 150];
+let gameMenuBlockWidth = [256, 256, 256];
+let gameMenuBlockHeight = [256, 256, 256];
 
 let selectAGameMode = new Image();
 selectAGameMode.src = "images/selectAGameMode.png"
@@ -803,6 +820,18 @@ function animate() {
 
         if (gameState === "selectGameMode") {
             selectGameMode()
+        }
+
+        if (gameState === "classicGameMode") {
+            classicGameMode()
+        }
+        
+        if (gameState === "survivalGameMode") {
+            survivalGameMode()
+        }
+
+        if (gameState === "dominationGameMode") {
+            dominationGameMode()
         }
 
         // if (gameState === "Classic") {
