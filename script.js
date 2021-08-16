@@ -39,20 +39,16 @@ function checkPos(mouseEvent) {
                     menuMarioY[1] = mainMenuButtonY[i] + 2;
                 }
             }
-            else {
-                menuMarioVisible = false;
-            }
+            // else {
+            //     menuMarioVisible = false;
+            // }
         }
     }
     if (gameState === "selectGameMode") {
         for (i = 0; i < gameMenuButtonX.length; i++) {
-            console.log(i);
-            console.log(`gameMenuButtonX[i]: ${gameMenuButtonX[i]}, mouseX: ${mouseX}, maxX: ${gameMenuButtonX[i] + gameMenuButtonWidth[i]}`);
-            console.log(`gameMenuButtonY[i]: ${gameMenuButtonY[i]}, mouseY: ${mouseY}, maxY: ${gameMenuButtonY[i] + gameMenuButtonHeight[i]}`);
             if (mouseX > gameMenuButtonX[i] && mouseX < gameMenuButtonX[i] + gameMenuButtonWidth[i]) {
                 if (mouseY > gameMenuButtonY[i] && mouseY < gameMenuButtonY[i] + gameMenuButtonHeight[i]) {
                     // menuHover.play();
-                    console.log("in if statement");
                     menuMarioVisible = true;
                     menuMarioX[0] = gameMenuButtonX[i] - (menuMarioWidth/2) - 2;
                     menuMarioY[0] = gameMenuButtonY[i] + 2;
@@ -60,9 +56,9 @@ function checkPos(mouseEvent) {
                     menuMarioY[1] = gameMenuButtonY[i] + 2;
                 }
             }
-            else {
-                menuMarioVisible = false;
-            }
+            // else {
+            //     menuMarioVisible = false;
+            // }
         }
     }
 };
@@ -757,7 +753,6 @@ function selectGameMode() {
     if (menuMarioVisible === true) {
         context.drawImage(menuMario, menuMarioX[0] - menuMarioSize, menuMarioY[0], menuMarioSize, menuMarioHeight);
         context.drawImage(menuMario, menuMarioX[1] + (menuMarioSize / 11), menuMarioY[1], menuMarioSize, menuMarioHeight);
-        console.log(`The variable menuMarioVisible is set to true`);
     }
 };
 
