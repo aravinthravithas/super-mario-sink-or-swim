@@ -23,20 +23,41 @@ function checkPos(mouseEvent) {
         mouseX = mouseEvent.pageX - this.offsetLeft;
         mouseY = mouseEvent.pageY - this.offsetTop;
     }  
-    else if(mouseEvent.offsetX || mouseEvent.offsetY == 0) {
+    else if (mouseEvent.offsetX || mouseEvent.offsetY == 0) {
         mouseX = mouseEvent.offsetX;
         mouseY = mouseEvent.offsetY;
     }
     if (gameState === "mainMenu") {
-        for (i = 0; i < menuButtonX.length; i++) {
-            if (mouseX > menuButtonX[i] && mouseX < menuButtonX[i] + menuButtonWidth[i]) {
-                if (mouseY > menuButtonY[i] && mouseY < menuButtonY[i] + menuButtonHeight[i]) {
+        for (i = 0; i < mainMenuButtonX.length; i++) {
+            if (mouseX > mainMenuButtonX[i] && mouseX < mainMenuButtonX[i] + mainMenuButtonWidth[i]) {
+                if (mouseY > mainMenuButtonY[i] && mouseY < mainMenuButtonY[i] + mainMenuButtonHeight[i]) {
                     menuHover.play();
                     menuMarioVisible = true;
-                    menuMarioX[0] = menuButtonX[i] - (menuMarioWidth/2) - 2;
-                    menuMarioY[0] = menuButtonY[i] + 2;
-                    menuMarioX[1] = menuButtonX[i] + menuButtonWidth[i] + (menuMarioWidth/2); 
-                    menuMarioY[1] = menuButtonY[i] + 2;
+                    menuMarioX[0] = mainMenuButtonX[i] - (menuMarioWidth/2) - 2;
+                    menuMarioY[0] = mainMenuButtonY[i] + 2;
+                    menuMarioX[1] = mainMenuButtonX[i] + mainMenuButtonWidth[i] + (menuMarioWidth/2); 
+                    menuMarioY[1] = mainMenuButtonY[i] + 2;
+                }
+            }
+            else {
+                menuMarioVisible = false;
+            }
+        }
+    }
+    if (gameState === "selectGameMode") {
+        for (i = 0; i < gameMenuButtonX.length; i++) {
+            console.log(i);
+            console.log(`gameMenuButtonX[i]: ${gameMenuButtonX[i]}, mouseX: ${mouseX}, maxX: ${gameMenuButtonX[i] + gameMenuButtonWidth[i]}`);
+            console.log(`gameMenuButtonY[i]: ${gameMenuButtonY[i]}, mouseY: ${mouseY}, maxY: ${gameMenuButtonY[i] + gameMenuButtonHeight[i]}`);
+            if (mouseX > gameMenuButtonX[i] && mouseX < gameMenuButtonX[i] + gameMenuButtonWidth[i]) {
+                if (mouseY > gameMenuButtonY[i] && mouseY < gameMenuButtonY[i] + gameMenuButtonHeight[i]) {
+                    // menuHover.play();
+                    console.log("in if statement");
+                    menuMarioVisible = true;
+                    menuMarioX[0] = gameMenuButtonX[i] - (menuMarioWidth/2) - 2;
+                    menuMarioY[0] = gameMenuButtonY[i] + 2;
+                    menuMarioX[1] = gameMenuButtonX[i] + gameMenuButtonWidth[i] + (menuMarioWidth/2); 
+                    menuMarioY[1] = gameMenuButtonY[i] + 2;
                 }
             }
             else {
@@ -46,13 +67,13 @@ function checkPos(mouseEvent) {
     }
 };
 
-canvas.addEventListener("mouseup", checkStartClick);
+canvas.addEventListener("mouseup", checkStartScreenClick);
 
-function checkStartClick() {
+function checkStartScreenClick() {
     if (mouseX > 0 && mouseX < canvas.width) {
         if (mouseY > 0 && mouseY < canvas.height) {
             startScreenClick.play();
-            canvas.removeEventListener("mouseup", checkStartClick);
+            canvas.removeEventListener("mouseup", checkStartScreenClick);
             setTimeout(
                 function() { 
                     gameState = "mainMenu"; 
@@ -62,14 +83,15 @@ function checkStartClick() {
     }
 }
 
-function checkMenuClick() {
+function checkMainMenuClick() {
     if (gameState === "mainMenu") {
-        for (i = 0; i < menuButtonX.length; i++) {
-            if (mouseX > menuButtonX[i] && mouseX < menuButtonX[i] + menuButtonWidth[i]) {
-                if (mouseY > menuButtonY[i] && mouseY < menuButtonY[i] + menuButtonHeight[i]) {
+        for (i = 0; i < mainMenuButtonX.length; i++) {
+            if (mouseX > mainMenuButtonX[i] && mouseX < mainMenuButtonX[i] + mainMenuButtonWidth[i]) {
+                if (mouseY > mainMenuButtonY[i] && mouseY < mainMenuButtonY[i] + mainMenuButtonHeight[i]) {
                     menuSelection.play();
                     canvas.removeEventListener("mousemove", checkPos);
-                    canvas.removeEventListener("mouseup", checkMenuClick);
+                    canvas.removeEventListener("mouseup", checkMainMenuClick);
+                    menuMarioVisible = false;
                     if (i === 0) {
                         play.src = "images/playActive.png";
                         setTimeout(
@@ -98,39 +120,44 @@ function checkMenuClick() {
             }
         }
     }
-    // for (i = 0; i < menuButtonX.length; i++) {
-    //     if (mouseX > menuButtonX[i] && mouseX < menuButtonX[i] + menuButtonWidth[i]) {
-    //         if (mouseY > menuButtonY[i] && mouseY < menuButtonY[i] + menuButtonHeight[i]) {
-    //             canvas.removeEventListener("mousemove", checkPos);
-    //             canvas.removeEventListener("mouseup", checkMenuClick);
-    //             menuSelection.play();
-    //             if (i === 0) {
-    //                 play.src = "images/playActive.png";
-    //                 setTimeout(
-    //                     function() { 
-    //                         gameState = "selectGameMode"; 
-    //                     }, 300
-    //                 );
-    //             }
-    //             if (i === 1) {
-    //                 controls.src = "images/controlsActive.png";
-    //                 setTimeout(
-    //                     function() { 
-    //                         gameState = "controls"; 
-    //                     }, 300
-    //                 );
-    //             }
-    //             if (i === 2) {
-    //                 credits.src = "images/creditsActive.png";
-    //                 setTimeout(
-    //                     function() { 
-    //                         gameState = "credits"; 
-    //                     }, 300
-    //                 );
-    //             }
-    //         }
-    //     }
-    // }
+};
+
+function checkGameMenuClick() {
+    if (gameState === "selectGameMode") {
+        for (i = 0; i < gameMenuButtonX.length; i++) {
+            if (mouseX > gameMenuButtonX[i] && mouseX < gameMenuButtonX[i] + gameMenuButtonWidth[i]) {
+                if (mouseY > gameMenuButtonY[i] && mouseY < gameMenuButtonY[i] + gameMenuButtonHeight[i]) {
+                    // menuSelection.play(); <--- PLAY THE RIGHT SOUND HERE
+                    canvas.removeEventListener("mousemove", checkPos);
+                    canvas.removeEventListener("mouseup", checkGameMenuClick);
+                    if (i === 0) {
+                        classic.src = "images/classicActive.png";
+                        // setTimeout(
+                        //     function() { 
+                        //         gameState = "selectGameMode"; 
+                        //     }, 300
+                        // );
+                    }
+                    if (i === 1) {
+                        survival.src = "images/survivalActive.png";
+                        // setTimeout(
+                        //     function() { 
+                        //         gameState = "controls"; 
+                        //     }, 300
+                        // );
+                    }
+                    if (i === 2) {
+                        domination.src = "images/dominationActive.png";
+                        // setTimeout(
+                        //     function() { 
+                        //         gameState = "credits"; 
+                        //     }, 300
+                        // );
+                    }
+                }
+            }
+        }
+    }
 };
 
 let keys = [];
@@ -168,7 +195,7 @@ window.addEventListener("keyup", function(event) {
 
 // Code block below prevents the clicking of arrows keys from scrolling in active browser window
 window.addEventListener("keydown", function(event) {
-    if([32, 37, 38, 39, 40].indexOf(event.keyCode) > -1) {
+    if ([32, 37, 38, 39, 40].indexOf(event.keyCode) > -1) {
         event.preventDefault();
     }
 }, false);
@@ -677,10 +704,15 @@ let menuMarioVisible = false;
 let menuMarioSize = menuMarioWidth;
 // let menuMarioRotate = 0;
 
-let menuButtonX = [(0.5 * canvas.width) - 75, (0.5 * canvas.width) - 140, (0.5 * canvas.width) - 115];
-let menuButtonY = [(0.5 * canvas.height) + 80, (0.5 * canvas.height) + 135, (0.5 * canvas.height) + 190];
-let menuButtonWidth = [137, 273, 221];
-let menuButtonHeight = [36, 36, 36];
+let mainMenuButtonX = [(0.5 * canvas.width) - 75, (0.5 * canvas.width) - 140, (0.5 * canvas.width) - 115];
+let mainMenuButtonY = [(0.5 * canvas.height) + 80, (0.5 * canvas.height) + 135, (0.5 * canvas.height) + 190];
+let mainMenuButtonWidth = [137, 273, 221];
+let mainMenuButtonHeight = [36, 36, 36];
+
+let gameMenuButtonX = [(0.5 * canvas.width) - 513, (0.5 * canvas.width) - 130, (0.5 * canvas.width) + 246];
+let gameMenuButtonY = [(0.5 * canvas.height) + 150, (0.5 * canvas.height) + 150, (0.5 * canvas.height) + 150];
+let gameMenuButtonWidth = [221, 255, 305];
+let gameMenuButtonHeight = [36, 36, 36];
 
 let selectAGameMode = new Image();
 selectAGameMode.src = "images/selectAGameMode.png"
@@ -701,19 +733,20 @@ function startScreen() {
 
 function mainMenu() {
     menuMusic.play();
-    canvas.addEventListener("mouseup", checkMenuClick);
+    canvas.addEventListener("mouseup", checkMainMenuClick);
     context.drawImage(menuLogo, 0, 0, 502, 297, (0.5 * canvas.width) - 255, (0.5 * canvas.height) - 260, 502, 297);
     context.drawImage(play, 0, 0, 137, 36, (0.5 * canvas.width) - 75, (0.5 * canvas.height) + 80, 137, 36);
     context.drawImage(controls, 0, 0, 273, 36, (0.5 * canvas.width) - 140, (0.5 * canvas.height) + 135, 273, 36);
     context.drawImage(credits, 0, 0, 221, 36, (0.5 * canvas.width) - 115, (0.5 * canvas.height) + 190, 221, 36);
     if (menuMarioVisible === true) {
-
         context.drawImage(menuMario, menuMarioX[0] - menuMarioSize, menuMarioY[0], menuMarioSize, menuMarioHeight);
         context.drawImage(menuMario, menuMarioX[1] + (menuMarioSize / 11), menuMarioY[1], menuMarioSize, menuMarioHeight);
     }
 };
 
 function selectGameMode() {
+    canvas.addEventListener("mousemove", checkPos);
+    canvas.addEventListener("mouseup", checkGameMenuClick);
     context.drawImage(selectAGameMode, 0, 0, 725, 52, (0.5 * canvas.width) - 365, (0.5 * canvas.height) - 260, 725, 52);
     context.drawImage(blockCoin, 0, 0, 256, 256, (0.5 * canvas.width) - 530, (0.5 * canvas.height) - 150, 256, 256);
     context.drawImage(blockFrog, 0, 0, 256, 256, (0.5 * canvas.width) - 130, (0.5 * canvas.height) - 150, 256, 256);
@@ -721,6 +754,11 @@ function selectGameMode() {
     context.drawImage(classic, 0, 0, 221, 36, (0.5 * canvas.width) - 513, (0.5 * canvas.height) + 150, 221, 36);
     context.drawImage(survival, 0, 0, 255, 36, (0.5 * canvas.width) - 130, (0.5 * canvas.height) + 150, 255, 36);
     context.drawImage(domination, 0, 0, 305, 36, (0.5 * canvas.width) + 246, (0.5 * canvas.height) + 150, 305, 36);
+    if (menuMarioVisible === true) {
+        context.drawImage(menuMario, menuMarioX[0] - menuMarioSize, menuMarioY[0], menuMarioSize, menuMarioHeight);
+        context.drawImage(menuMario, menuMarioX[1] + (menuMarioSize / 11), menuMarioY[1], menuMarioSize, menuMarioHeight);
+        console.log(`The variable menuMarioVisible is set to true`);
+    }
 };
 
 function startGame() {
