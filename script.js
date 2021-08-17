@@ -101,7 +101,8 @@ function checkMainMenuClick() {
                 if (mouseY > mainMenuButtonY[i] && mouseY < mainMenuButtonY[i] + mainMenuButtonHeight[i]) {
                     menuSelection.play();
                     canvas.removeEventListener("mousemove", checkPos);
-                    canvas.removeEventListener("mouseup", checkMainMenuClick);                    menuMarioVisible = false;
+                    canvas.removeEventListener("mouseup", checkMainMenuClick);                    
+                    menuMarioVisible = false;
                     if (i === 0) {
                         play.src = "images/playActive.png";
                         setTimeout(
