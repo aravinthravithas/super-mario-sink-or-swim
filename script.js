@@ -142,6 +142,7 @@ function checkGameMenuClick() {
                     courseSelection.play();
                     canvas.removeEventListener("mousemove", checkPos);
                     canvas.removeEventListener("mouseup", checkGameMenuClick);
+                    menuMarioVisible = false;
                     gameModeSelected = true;
                     if (i === 0) {
                         classic.src = "images/classicActive.png";
