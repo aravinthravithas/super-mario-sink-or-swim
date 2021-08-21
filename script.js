@@ -843,6 +843,25 @@ function classicGameMode() {
     objectData.forEach(function(object) {
         drawAndOrUpdateObjects(object.objectArray, object.sourceWidth, object.sourceHeight, object.xAxisOffset, object.yAxisOffset, object.destinationWidth, object.destinationHeight, object.objectClass)
     });
+
+    let gradient = context.createLinearGradient (0, 0, 450, 0);
+    // gradient.addColorStop(0, "#E9D618");
+    gradient.addColorStop(0, "#FFFFFF");
+    // gradient.addColorStop(0.6, "#E9D618");
+    gradient.addColorStop(0.6, "#FFFFFF");
+    gradient.addColorStop(0.6, "#FFFFFF");
+    gradient.addColorStop(1, "#FFFFFF");
+
+    context.fillStyle = gradient;
+
+    context.font = "30px Arial";
+    context.fillText(`COINS: / 15`, 20, 50);
+
+    context.font = "30px Arial";
+    context.fillText(`HEALTH: / 100`, 20, 105);
+
+    context.font = "30px Arial";
+    context.fillText(`TIME LEFT: / 90`, 20, 160);
 };
 
 let fps, fpsInterval, startTime, now, then, elapsed;
