@@ -18,6 +18,10 @@ let menuHover = new Audio("audio/menuHover.mp3");
 let menuSelection = new Audio("audio/menuSelection.mp3");
 let courseHover = new Audio("audio/courseHover.mp3");
 let courseSelection = new Audio("audio/courseSelection.mp3");
+let gameMusic = new Audio("audio/gameMusic.mp3");
+let coinCollection = new Audio("audio/coinCollection.mp3");
+let fishCollision = new Audio("audio/fishCollision.mp3");
+let gameOver = new Audio("audio/gameOver.mp3");
  
 // canvas.addEventListener("mousemove", checkPos);
 
@@ -74,6 +78,9 @@ function checkPos(mouseEvent) {
                     menuMarioY[1] = gameMenuButtonY[i] + 2;
                 }
             }
+            // else {
+            //     menuMarioVisible = false;
+            // }
         }
     }
 };
@@ -689,6 +696,7 @@ function drawAndOrUpdateObjects(objectArray, sourceWidth, sourceHeight, xAxisOff
     for (let i = 0; i < objectArray.length; i++) {
         if (objectArray === gCs) {
             if (collisionBetweenMarioAndObject(mario, gCs[i])) {
+                coinCollection.play();
                 gCs.splice(i, 1);
                 gCs.push(new GC());
             }
@@ -696,6 +704,7 @@ function drawAndOrUpdateObjects(objectArray, sourceWidth, sourceHeight, xAxisOff
         }
         else {
             if (collisionBetweenMarioAndObject(mario, objectArray[i])) {
+                fishCollision.play();
                 context.drawImage(collision1, 0, 0, sourceWidth, sourceHeight, objectArray[i].x - xAxisOffset, objectArray[i].y - yAxisOffset, destinationWidth, destinationHeight);
                 objectArray.splice(i, 1);
                 objectArray.push(new objectClass());
@@ -818,6 +827,16 @@ function selectGameMode() {
 };
 
 function startGame() {
+    drawMario(marioSprite, mario.width * mario.frameX, mario.height * mario.frameY, mario.width, mario.height, mario.x, mario.y, mario.width, mario.height);
+    moveMario();
+    handleMarioFrame();
+    objectData.forEach(function(object) {
+        drawAndOrUpdateObjects(object.objectArray, object.sourceWidth, object.sourceHeight, object.xAxisOffset, object.yAxisOffset, object.destinationWidth, object.destinationHeight, object.objectClass)
+    });
+};
+
+function classicGameMode() {
+    gameMusic.play();
     drawMario(marioSprite, mario.width * mario.frameX, mario.height * mario.frameY, mario.width, mario.height, mario.x, mario.y, mario.width, mario.height);
     moveMario();
     handleMarioFrame();
