@@ -854,8 +854,8 @@ function classicGameMode() {
 
     context.fillStyle = gradient;
 
-    context.font = "30px Arial";
-    context.fillText(`COINS: / 15`, 20, 50);
+    context.font = "15px SuperMarioBros3";
+    context.fillText(`coins: / 15`, 20, 50);
 
     context.font = "30px Arial";
     context.fillText(`HEALTH: / 100`, 20, 105);

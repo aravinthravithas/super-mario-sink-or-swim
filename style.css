@@ -13,3 +13,8 @@ body {
     height: 100%;
     overflow: hidden;
 }
+
+@font-face {
+    font-family: 'SuperMarioBros3';
+    src: url('superMarioBros3.ttf') format('truetype');
+}
