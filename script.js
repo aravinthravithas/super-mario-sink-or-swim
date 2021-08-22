@@ -788,6 +788,9 @@ blockFrog.src = "images/blockFrog.png"
 let blockStar = new Image();
 blockStar.src = "images/blockStar.png"
 
+let coinHud = new Image();
+coinHud.src = "images/coinHud.png"
+
 function startScreen() {
     canvas.addEventListener("mousemove", checkPos);
     context.drawImage(startLogo, 0, 0, 600, 356, (0.5 * canvas.width) - 310, (0.5 * canvas.height) - 260, 600, 356);
@@ -837,6 +840,7 @@ function startGame() {
 
 function classicGameMode() {
     gameMusic.play();
+    context.drawImage(coinHud, 0, 0, 25, 28, (0.5 * canvas.width) - 365, (0.5 * canvas.height) - 200, 25, 28);
     drawMario(marioSprite, mario.width * mario.frameX, mario.height * mario.frameY, mario.width, mario.height, mario.x, mario.y, mario.width, mario.height);
     moveMario();
     handleMarioFrame();
